@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pandel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#FDF5E6] grid justify-center items-center dark:text-white">
+    <!--navbar-->
+    <nav id="navbar" class="bg-[#B22222] mx-auto w-screen px-2">
+        <div class="relative flex items-center justify-between">
+            <a href="details.html"><img class="h-8 w-auto rounded-t-full flex flex-shrink-0 items-center" 
+            src="https://images.pexels.com/photos/14007628/pexels-photo-14007628.jpeg?auto=compress&cs=tinysrgb&w=400" alt="logo"></a>
+            <h1 class="font-extrabold font-serif text-[#FFD700] text-xl">আলোয় ভরা শহর!</h1>
+            <div class="hidden md:flex md:items-center md:justify-center">
+                <a href="index.html" class="hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6]">Home</a>
+                <a href="#" class="hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6]">Map</a>
+            </div>
+            <div id="menubar" class="md:hidden">
+                <a href="#"><button class="font-bold text-[#FFD700] hover:w-6 hover:h-6 hover:rounded-full hover:bg-[#4B2E2E]" onclick="showsidebar()">&#9776;</button></a>
+            </div>
+            <div id="sidebar" class="hidden fixed top-0 right-0 h-screen w-[30vh] z-[999] shadow-2xl shadow-[#4B2E2E] flex-col items-start justify-start backdrop-blur-md">
+                <button class="py-1 px-2 text-[#4B2E2E] h-auto font-bold text-3xl" onclick="hidesidebar()">&#10005;</button>
+                <a href="index.html" class="hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 text-[#FFD700] w-full h-auto font-bold text-xl flex items-center gap-x-20 justify-center">Home</a>
+                <a href="#" class="hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 text-[#FFD700] w-full h-auto font-bold text-xl flex items-center gap-x-20 justify-center">Map</a>
+            </div>
+        </div>   
+    </nav>
+    
+    <main class="flex-grow">
+        <!--option-->
+        <div id="option" class="w-screen h-[90vh] p-10 flex flex-col md:flex-row items-center md:justify-between mt-1 md:mt-[20vh] mx-8">
+            <!--North Kolkata-->
+            <div class="items-center flex flex-col">
+                <div id="nkoption" class=" rounded-full flex-col items-center space-y-1 my-10 md:my-0 hover:cursor-pointer transition-transform transform duration-500 ease-in-out" onclick="optionsNK()">
+                    <img class="object-cover w-40 h-40 rounded-full border border-[#B22222] shadow-lg  shadow-[#4B2E2E] hover:scale-110" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq3yMZiBFtbGnQEfYZYQSceTul8HS1GD5h5Eyr6cgcI2B4lEbrrFU4Ndz_4b8VrY5i8DI&usqp=CAU" alt="north kolkata">
+                    <h1 class="font-semibold text-[#B22222] text-xl text-center mt-5 hover:text-[#4B2E2E]">North Kolkata</h1>
+                </div>
+                <!--Pandels-->
+                <div id="nkpandel" class="w-auto h-auto bg-[#FFD700] rounded-lg text-center text-[#B22222] shadow-xl shadow-[#4B2E2E] p-4 opacity-0 scale-90 hidden transition duration-500 ease-in-out transform" onclick="pandelsNK()">
+                    <h1 class="font-bold italic text-2xl">North kolkata</h1>
+                    <hr class="border-t border-[#B22222] mx-1 rounded-full my-2">
+                    <ul role="list" class="marker:text-[#B22222] list-disc pl-8 space-y-3">
+                        <li id="Bagbazar" class="hover:underline" onclick="showPandelDetails('Bagbazar')">Bagbazar Sarbojonin</li>
+                        <li id="Ahiritola" class="hover:underline" onclick="showPandelDetails('Ahiritola')">Ahiritola Sarbojonin</li>
+                        <li id="Kumartuli" class="hover:underline" onclick="showPandelDetails('Kumartuli')">Kumartuli Park</li>
+                        <li id="Telenga" class="hover:underline" onclick="showPandelDetails('Telenga')">Telenga bagan</li>
+                        <li id="Nalin" class="hover:underline" onclick="showPandelDetails('Nalin')">Nalin Sarkar Sreet</li>
+                        <li id="Dumdum" class="hover:underline" onclick="showPandelDetails('Dumdum')">Dumdum Park Tarun Sangha</li>
+                        <li id="Sreebhumi" class="hover:underline" onclick="showPandelDetails('Sreebhumi')">Sreebhumi Sporting Club</li>
+                        <li id="Hatibagan" class="hover:underline" onclick="showPandelDetails('Hatibagan')">Hatibagan Sarbojonin</li>
+                        <li id="Jagat" class="hover:underline" onclick="showPandelDetails('Jagat')">Jagat Mukherjee Park</li>
+                        <li id="Saltlake" class="hover:underline" onclick="showPandelDetails('Saltlake')">FD block, Saltlake</li>
+                    </ul>
+                </div>
+            </div>
+            <!--Central Kolkata-->
+            <div class="items-center flex flex-col">
+                <div id="ckoption" class=" rounded-full flex flex-col items-center space-y-1 my-10 md:my-0 hover:cursor-pointer transition-transform transform duration-500 ease-in-out" onclick="optionsCK()">
+                    <img class="object-cover w-40 h-40 rounded-full hover:w-44 hover:h-44 border border-[#b22222] shadow-lg shadow-[#4B2E2E] hover:scale-110 " src="https://mediaim.expedia.com/destination/2/c900425215144c352c957f5de9bb2ead.jpg" alt="">
+                    <h1 class="font-semibold text-[#B22222] text-xl text-center mt-5 hover:text-[#4B2E2E]">Central Kolkata</h1>
+                </div>
+                <!--Pandels-->
+                <div id="ckpandel" class="w-auto h-auto bg-[#FFD700] rounded-lg text-center text-[#B22222] shadow-xl shadow-[#4B2E2E] p-4 opacity-0 scale-90 hidden transition duration-500 ease-in-out transform" onclick="pandelsCK()">
+                    <h1 class="font-bold italic text-2xl">Central Kolkata</h1>
+                    <hr class="border-t border-[#B22222] mx-1 rounded-full my-2">
+                    <ul role="list" class="marker:text-[#B22222] list-disc pl-8 space-y-3">
+                        <li id="14" class="hover:underline" onclick="showPandelDetails('14')">14 Pally Udayan Sangha</li>
+                        <li id="37" class="hover:underline" onclick="showPandelDetails('37')">37 Pally Sarbojanin Durgotsab</li>
+                        <li id="47" class="hover:underline" onclick="showPandelDetails('47')">47 Pally Jubak Brinda Durga Puja</li>
+                        <li id="centralCalcutta" class="hover:underline" onclick="showPandelDetails('centralCalcutta')">Central Calcutta Youth Association</li>
+                        <li id="collegeSquare" class="hover:underline" onclick="showPandelDetails('collegeSquare')">College Square Sarbojanin Durgotsav</li>
+                        <li id="Matribhumi" class="hover:underline" onclick="showPandelDetails('Matribhumi')">Entally Matribhumi Durga Puja</li>
+                        <li id="Entally" class="hover:underline" onclick="showPandelDetails('Entally')">Entally Sarbojanin Sri Sri Durga Puja</li>
+                        <li id="kanaiDhar" class="hover:underline" onclick="showPandelDetails('kanaiDhar')">Kanai Dhar Lane Adhibasi Brinda</li>
+                        <li id="machuaBazar" class="hover:underline" onclick="showPandelDetails('machuaBazar')">Machua Bazar Sarbajanik Durga Puja Samity</li>
+                        <li id="mdAli" class="hover:underline" onclick="showPandelDetails('mdAli')">Md. Ali Park Durga Puja</li>
+                        <li id="Pallir" class="hover:underline" onclick="showPandelDetails('Pallir')">Pallir Yubak Brinda Durga Puja</li>
+                        <li id="Santosh" class="hover:underline" onclick="showPandelDetails('Santosh')">Santosh Mitra Square Durga Puja</li>
+                        <li id="Wellington" class="hover:underline" onclick="showPandelDetails('Wellington')">Wellington Nagarik Kalyan Samity Durga Puja</li>
+                    </ul>
+                </div>
+            </div>
+            <!--South Kolkata-->
+            <div class="items-center flex flex-col">
+                <div id="skoption" class=" rounded-full flex flex-col items-center space-y-1 my-10 md:my-0 hover:cursor-pointer transition-transform transform duration-500 ease-in-out" onclick="optionsSK()">
+                    <img class="object-cover w-40 h-40 rounded-full hover:w-44 hover:h-44 border border-[#b22222] shadow-lg shadow-[#4B2E2E] hover:scale-110 " src="https://kolkatatourism.travel/images/places-to-visit/headers/kalighat-kali-temple-kolkata-tourism-entry-fee-timings-holidays-reviews-header.jpg" alt="">
+                    <h1 class="font-semibold text-[#B22222] text-xl text-center mt-5 hover:text-[#4B2E2E]">South Kolkata</h1>
+                </div>
+                <!--Pandels-->
+                <div id="skpandel" class="w-auto h-auto bg-[#FFD700] rounded-lg text-center px-4 text-[#B22222] shadow-xl shadow-[#4B2E2E] p-4 opacity-0 scale-90 hidden transition duration-500 ease-in-out transform"  onclick="pandelsSK()">
+                    <h1 class="font-bold italic text-2xl">South Kolkata</h1>
+                    <hr class="border-t border-[#B22222] mx-1 rounded-full my-2">
+                    <ul role="list" class="marker:text-[#B22222] list-disc pl-8 space-y-3">
+                        <li id="Badamtala" class="hover:underline" onclick="showPandelDetails('Badamtala')">Badamtala Ashar Sangha</li>
+                        <li id="66" class="hover:underline" onclick="showPandelDetails('66')">66 Pally</li>
+                        <li id="Chetla" class="hover:underline" onclick="showPandelDetails('Chetla')">Chetla Agrani Sangha</li>
+                        <li id="Suruchi" class="hover:underline" onclick="showPandelDetails('Suruchi')">Suruchi Sangha</li>
+                        <li id="Mudiali" class="hover:underline" onclick="showPandelDetails('Mudiali')">Mudiali Sangha</li>
+                        <li id="Deshopriya" class="hover:underline" onclick="showPandelDetails('Deshopriya')">Deshopriya Park</li>
+                        <li id="Tridhara" onclick="showPandelDetails('Tridhara')">Tridhara Sangha</li>
+                        <li id="Bullygaunge" class="hover:underline" onclick="showPandelDetails('Bullygaunge')">Bullygaunge Cultural Association</li>
+                        <li id="Hindustanp" class="hover:underline" onclick="showPandelDetails('Hindustanp')">Hindustan Park</li>
+                        <li id="Hindustanc" class="hover:underline" onclick="showPandelDetails('Hindustanc')">Hindustan Club</li>
+                        <li id="Shinghi" class="hover:underline" onclick="showPandelDetails('Shinghi')">Shinghi Park</li>
+                        <li id="Ekdalia" class="hover:underline" onclick="showPandelDetails('Ekdalia')">Ekdalia Evergreen Club</li>
+                        <li id="Jodhpur" class="hover:underline" onclick="showPandelDetails('Jodhpur')">Jodhpur Park</li>
+                        <li id="Maddox" class="hover:underline" onclick="showPandelDetails('Maddox')">Maddox</li>
+                    </ul>
+                </div>
+            </div>
+            <!--Khidirpore-->
+            <div class="items-center flex flex-col">
+                <div id="koption" class=" rounded-full flex flex-col items-center space-y-1 my-10 md:my-0 hover:cursor-pointer transition-transform transform duration-500 ease-in-out" onclick="optionsK()">
+                    <img class="object-cover w-40 h-40 rounded-full hover:w-44 hover:h-44 border border-[#b22222] shadow-lg shadow-[#4B2E2E] hover:scale-110 " src="https://i.ytimg.com/vi/uhoh2Soy8J0/maxresdefault.jpg" alt="">
+                    <h1 class="font-semibold text-[#B22222] text-xl text-center mt-5 hover:text-[#4B2E2E]">Khidirpore</h1>
+                </div>
+                <!--Pandels-->
+                <div id="kpandel" class="w-auto h-auto bg-[#FFD700] rounded-lg text-center text-[#B22222] shadow-xl shadow-[#4B2E2E] p-4 opacity-0 scale-90 hidden transition duration-500 ease-in-out transform" onclick="pandelsK()">
+                    <h1 class="font-bold italic text-2xl">Khidirpore</h1>
+                    <hr class="border-t border-[#B22222] mx-1 rounded-full my-2">
+                    <ul role="list" class="marker:text-[#B22222] list-disc pl-8 space-y-3">
+                        <li id="Udayan" class="hover:underline" onclick="showPandelDetails('Udayan')">Udayan Sangha</li>
+                        <li id="Khidirporep" class="hover:underline" onclick="showPandelDetails('Khidirporep')">Khidirpore Pally Saradiya</li>
+                        <li id="Nabarag" class="hover:underline" onclick="showPandelDetails('Nabarag')">Nabarag</li>
+                        <li id="26" class="hover:underline" onclick="showPandelDetails('26')">26 Pally</li>
+                        <li id="Kabitirtha" class="hover:underline" onclick="showPandelDetails('Kabitirtha')">Kabitirtha Saradotsav</li>
+                        <li id="Milan" class="hover:underline" onclick="showPandelDetails('Milan')">Milan Sangha</li>
+                        <li id="75" class="hover:underline" onclick="showPandelDetails('75')">75 Pally</li>
+                        <li id="74" class="hover:underline" onclick="showPandelDetails('74')">74 Pally</li>
+                        <li id="25" class="hover:underline" onclick="showPandelDetails('25')">25 Pally</li>
+                        <li id="Khidirpore" class="hover:underline" onclick="showPandelDetails('Khidirpore')">Khidirpore Sarbojanin</li>   
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--Pandel details-->
+        <div id="pandeldetails" class="w-screen h-[100vh] flex-col items-center text-center justify-center text-[#B22222] text-xl hidden" ondblclick="hidePandelDetails()">
+            <h1>Sreebhumi</h1>
+            <h2>Zone : North Kolkata</h2>
+            <p>Puja Code # IFD-DP-000093</p>
+            <p>Address: <address>Sree Bhumi Sporting Club, Canal Street, Sreebhumi</address></p>
+        </div>
+    </main>
+
+
+    <script src="pandels.js"></script>
+</body>
+</html>

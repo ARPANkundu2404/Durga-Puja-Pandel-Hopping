@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script type="module" src="firebaseauth.js"></script>
+</head>
+<body class="flex items-center justify-center bg-[#FDF5E6] h-screen">
+    <!--login container-->
+    <div id="logincontainer" class="w-auto h-auto bg-[#FFD700] p-6 rounded-lg shadow-2xl shadow-[#8b7777] opacity-100 transform transition-opacity translate-y-0 duration-500 ease-in-out ">
+        <div id="loginmessage" class="messageDiv hidden bg-[#B22222] text-[#FDF5E6] opacity-80 w-full h-8 text-center rounded-xl animate-pulse"></div>
+        <header class="text-4xl text-[#B22222] my-2 mx-10">SIGN-IN</header>
+        <!--details box-->
+        <div class="p-4 border border-[#4B2E2E] border-opacity-50 rounded-md">
+            <div class="mb-4">
+                <label for="loginemail" class="block font-medium text-[#B22222] mb-2 ">Email</label>
+                <input type="email" id="loginemail" name="Email" autocomplete="off" class="w-auto px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] focus:border-[#4B2E2E] focus:ring-opacity-50 focus:border-opacity-50" placeholder="Enter Your Email">
+            </div>
+            <div class="mb-4">
+                <label for="loginpassword" class="block font-medium text-[#B22222] mb-2 ">Password</label>
+                <input type="password" id="loginpassword" name="loginpassword" class="w-auto px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] focus:border-[#4B2E2E] focus:ring-opacity-50 focus:border-opacity-50" placeholder="Enter Your Password">
+            </div>
+            <button id="signinbtn" class="bg-[#4B2E2E] py-2 px-4 rounded-full text-[#FFD700] mx-20 mb-6 hover:bg-[#B22222] hover:cursor-pointer">Sign In</button>
+            <br><button id="sendotp" class="bg-[#4B2E2E] py-2 px-2 rounded-full text-[#FFD700] mx-20 mb-6 hover:bg-[#B22222] hover:cursor-pointer hidden" onclick="sendOTP()">Send OTP</button>
+            <div class="mb-4" id="OTPverify" style="display: none;">
+                <label for="otp" class="block font-medium text-[#B22222] mb-2">OTP Verifier</label>
+                <input type="password" id="otp" name="OTP" class="w-auto px-4 py-2 border rounded-sm mb-2 md:mb-0 focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] focus:border-[#4B2E2E] focus:ring-opacity-50 focus:border-opacity-50" placeholder="Enter the send OTP">
+                <button id="verify" class="bg-[#4B2E2E] text-[#FFD700] py-2 px-4 rounded-full">Verify</button>
+            </div>
+        </div>
+        <p class="mt-4 text-center text-[#4B2E2E] font-mono text-xs">Don't have an account 
+            <span id="signupbtn" class="text-[#B22222] font-mono text-sm cursor-pointer">Sign-up &rarr;</span>
+        </p> 
+    </div>
+    <!--sign-up container-->
+    <div id="signupcontainer" class=" hidden w-auto h-auto bg-[#FFD700] p-6 rounded-lg shadow-2xl shadow-[#8b7777] opacity-0 transform -translate-y-5 transition-opacity duration-500 ease-in-out">
+        <div id="signupmessage" class="messageDiv hidden bg-[#B22222] text-[#FDF5E6] opacity-80 w-full h-8 text-center rounded-xl animate-pluse"></div>
+        <header class="text-4xl text-[#B22222] my-2 mx-10">SIGN-UP</header>
+        <!--details box-->
+        <div class="p-4 border border-[#4B2E2E] border-opacity-50 rounded-md">
+            <div class="mb-4">
+                <label for="Name" class="block font-medium text-[#B22222] mb-2">Name</label>
+                <input type="text" id="Name" name="Name" autocomplete="given-name" class="w-auto px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] focus:border-[#4B2E2E] focus:ring-opacity-50 focus:border-opacity-50" placeholder="Enter Your Name">
+            </div>
+            <div class="mb-4">
+                <label for="signupemail" class="block font-medium text-[#B22222] mb-2">Email</label>
+                <input type="email" id="signupemail" name="Email" autocomplete="off" class="w-auto px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] focus:border-[#4B2E2E] focus:ring-opacity-50 focus:border-opacity-50" placeholder="Enter Your Email">
+            </div>
+            <div class="mb-4">
+                <label for="Mobilenumber" class="block font-medium text-[#B22222] mb-2">Mobile No.</label>
+                <input type="number" id="Mobilenumber" name="Mobilenumber" class="w-auto px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] focus:border-[#4B2E2E] focus:ring-opacity-50 focus:border-opacity-50"  placeholder="Enter Your Mobile Number">
+            </div>
+            <div class="box mb-4 relative">
+                <label for="signuppassword" class="block font-medium text-[#B22222] mb-2 ">Password</label>
+                <input type="password" id="signuppassword" name="Password" class="w-auto px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] focus:border-[#4B2E2E] focus:ring-opacity-50 focus:border-opacity-50 mb-2" placeholder="Enter Your Password">
+                <div id="password-strength" class="h-1 w-full mb-2 rounded-full bg-[#4B2E2E]"></div>
+            </div>
+            <div class="mb-4">
+                <label for="confirmpassword" class="block font-medium text-[#B22222] mb-2 ">Confirm Password</label>
+                <input type="password" id="confirmpassword" name="confirmpassword" class="w-auto px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] focus:border-[#4B2E2E] focus:ring-opacity-50 focus:border-opacity-50" placeholder="Confirm Your Password">
+                <p id="confirmpasswordmessage" class="text-[#b22222] text-xs mt-1 hidden">*Confirm your recently entered password.</p>
+            </div>
+            <button  id="sign_upbtn" class="bg-[#4B2E2E] py-2 px-4 rounded-full text-[#FFD700] mx-20 mb-6 disabled:opacity-50 enabled:hover:bg-[#B22222] enabled:hover:cursor-pointer" disabled>Sign In</button>
+        </div>
+        <p class="mt-4 text-center text-[#4B2E2E] font-mono text-xs">Have an account 
+            <span id="loginbtn" class="text-[#B22222] font-mono text-sm cursor-pointer">Sign-in &rarr;</span>
+        </p>
+    </div>
+    <script src="login.js"></script>  
+</body>
+</html>

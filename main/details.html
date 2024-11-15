@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#FDF5E6] grid justify-center items-center dark:text-[#FFD700]">
+    <!--navbar-->
+    <nav id="navbar" class="bg-[#B22222] mx-auto w-screen px-2">
+        <div class="relative flex items-center justify-between ">
+            <a href="details.html"><img class="h-8 w-auto rounded-t-full flex flex-shrink-0 " 
+            src="https://images.pexels.com/photos/14007628/pexels-photo-14007628.jpeg?auto=compress&cs=tinysrgb&w=400" alt="logo"></a>
+            <h1 class="font-extrabold font-serif text-[#FFD700] text-xl text-center">আলোয় ভরা শহর!</h1>
+            <!--toggle button-->
+            <div class="flex items-center">
+                <span id="bengaliIcon" class="mr-2 hidden">বাংলা</span>
+                    <label for="languageToggle" class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="languageToggle" class="sr-only peer">
+                        <div class="w-12 h-6 bg-[#FDF5E6] rounded-full peer peer-focus:ring-4 peer-focus:ring-[#FFD700] peer-checked:after:translate-x-6
+                        peer-checked:after:border-[#FDF5E6] after:content-[''] after:absolute after:top-[2px] after:left-[2px]
+                        after:bg-[#FDF5E6] after:bg-center after:bg-contain after:bg-no-repeat after:border-[#B22222] after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#4B2E2E] 
+                        peer-checked:after:bg-[url('https://cdn.iconscout.com/icon/free/png-256/free-letter-a-icon-download-in-svg-png-gif-file-formats--alphabet-typography-pack-sign-symbols-icons-4078306.png')] 
+                        after:bg-[url('https://spng.hippopng.com/20180419/dow/kisspng-bengali-alphabet-assamese-letter-26-english-letters-5ad8916764c8c0.3634452015241424394128.jpg')]" ></div>
+                    </label>
+                <span id="englishIcon" class="ml-2">English</span>
+            </div>    
+        </div>   
+    </nav>
+    <!--bengali content-->   
+    <div id="bengalicontent">
+        <h1 class="bg-[#B22222] text-[#FDF5E6] font-extrabold text-xl text-center mt-4">দুর্গা পূজা:</h1>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">মহালয়া:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            দুর্গা পূজার সূচনা হয় মহালয়া দিয়ে। মহালয়া হল পিতৃপক্ষের শেষ দিন এবং দেবীপক্ষের শুরু। এই দিন ভোরবেলা রেডিওতে বীরেন্দ্রকৃষ্ণ 
+            ভদ্রের কণ্ঠে ‘মহিষাসুরমর্দিনী’ শোনা এক ঐতিহ্য। মহালয়ায় দেবী দুর্গার মর্ত্যে আগমন ঘটে। পুরাণ অনুযায়ী, মহালয়াতে দেবী দুর্গা কৈলাস 
+            থেকে তার সন্তানদের সঙ্গে পৃথিবীতে আসেন, আর এই দিন থেকেই পূজা প্রস্তুতির সূচনা হয়
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">মহাষষ্ঠী:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            ষষ্ঠী হল দুর্গাপূজার প্রথম দিন। এই দিনে দেবী দুর্গার মুখমণ্ডল উন্মোচন হয়, যাকে 'বোধন' বলে। পুরাণ মতে, রাজা সুরথ প্রথম দুর্গা পূজার 
+            প্রচলন করেন এবং দেবীর আরাধনা করেন শারদীয় ঋতুতে। বোধন মূলত দেবীকে আহ্বান জানিয়ে পূজার সূচনা। ষষ্ঠীতে একটি গুরুত্বপূর্ণ কাজ হল 
+            'কলাবউ' স্নান করানো, যা একটি নারকেল গাছের কাণ্ডকে প্রতীকী মা গঙ্গা হিসেবে পূজা করা হয়। এই দিন সন্ধ্যায় হয় সন্ধিপূজা।
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">মহাসপ্তমী:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            সপ্তমী হল দেবী দুর্গার পূজার মূল সময়। এই দিন ভোরবেলায় ঘটে নবপত্রিকার প্রবেশ। নবপত্রিকা হল নয়টি পাতা, যা নবদুর্গার প্রতীক, এবং এগুলি
+            একসঙ্গে বাঁধা হয় কলাবউ দিয়ে। নবপত্রিকা পূজা মানে দেবী দুর্গার নয়টি রূপের পূজা। এই দিন শুরু হয় মূল আচার-অনুষ্ঠান, মন্ত্রোচ্চারণ, এবং অঞ্জলি দেওয়া।
+            সপ্তমীর দিন থেকেই শুরু হয় প্যান্ডেল হপিং, আলো আর আনন্দে ভরে ওঠে শহর।
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">মহাষ্টমী:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            অষ্টমী হল দুর্গাপূজার সবচেয়ে গুরুত্বপূর্ণ দিন। এই দিন হয় ‘সন্ধিপূজা’, যা অষ্টমী ও নবমীর সংযোগস্থলে অনুষ্ঠিত হয়। 
+            এই সন্ধিপূজা হয় যখন দেবী দুর্গা মহিষাসুরের সাথে লড়াই করেছিলেন এবং চণ্ড-মুণ্ডকে বধ করেছিলেন। তাই এই পূজা অত্যন্ত শক্তিশালী ও পবিত্র। 
+            অষ্টমীর দিন সকালে দেবীর উদ্দেশ্যে অঞ্জলি দেওয়া হয়, যাকে ‘অষ্টমীর অঞ্জলি’ বলা হয়। এছাড়া অনেক জায়গায় অষ্টমীর 
+            দিন কুমারী পূজা অনুষ্ঠিত হয়, যেখানে একটি কুমারী মেয়েকে দেবীর রূপে পূজা করা হয়।
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">মহানবমী:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            নবমীর পূজার শেষে অনুষ্ঠিত হয় ‘ধুনুচি নাচ’, যা একটি বিশেষ প্রথা। পুরুষ ও মহিলারা ধুনুচি, বা পোড়ানো নারকেল শাঁস দিয়ে পূজা করেন, যা দেখতে অত্যন্ত আনন্দদায়ক।
+            নবমী হল দুর্গাপূজার শেষ দিনগুলির মধ্যে একটি। এই দিনে মা দুর্গাকে মহানবমী ভোগ নিবেদন করা হয়, এবং তারপরে শুরু হয় নবমীর অঞ্জলি ও আরতি।
+            নবমীর রাতে আবার শুরু হয় প্যান্ডেল হপিং এবং শহরজুড়ে উৎসবের আনন্দ। 
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">মহাদশমী ও বিজয়া দশমী:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            দশমী হল বিদায়ের দিন। এই দিন দেবী দুর্গা কৈলাসে ফিরে যান। পূজার সমস্ত আচার-অনুষ্ঠান শেষে ঘটে ‘দেবীর বিসর্জন’। 
+            বিসর্জনের আগে মাকে সিঁদুর পরিয়ে দেওয়া হয়, যাকে ‘সিঁদুর খেলা’ বলা হয়। বিশেষ করে বিবাহিত মহিলারা এই সিঁদুর খেলা খেলেন। 
+            এরপর ঘটে প্রতিমা বিসর্জন, যেখানে দেবীকে গঙ্গায় বা কাছাকাছি কোন জলাশয়ে বিসর্জন দেওয়া হয়। বিজয়া দশমীর দিনে সবাই একে 
+            অপরকে ‘শুভ বিজয়া’ জানিয়ে কোলাকুলি করেন, মিষ্টিমুখ করেন।
+        </p>
+        <h2 class="font-medium bg-[#FFD700] text-[#B22222] px-1 py-1 my-2 w-56 rounded-e-full text-center">দুর্গাপূজার নিয়মাবলি ও আচার:</h2>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">সকালের অঞ্জলি:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            পূজার মূল আচারগুলি সাধারণত সকালবেলায় অনুষ্ঠিত হয়। প্রতিদিন সকালে অঞ্জলি দেওয়া হয়। অঞ্জলি দেওয়ার সময় পবিত্রতা বজায় রাখা অত্যন্ত গুরুত্বপূর্ণ। শুদ্ধ পোশাক পরিধান করে অঞ্জলি দিতে হয়।
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">প্রসাদ ও ভোগ:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            প্রতিদিন দেবীর জন্য ভোগ নিবেদন করা হয়। ভোগের মধ্যে প্রধানত ফল, মিষ্টি, এবং নিরামিষ খাবার থাকে। ভোগ প্রদানের সময় মন্ত্রপাঠ করে দেবীকে নিবেদন করা হয়, এবং পূজা শেষে এই ভোগ প্রসাদ হিসেবে সকলকে বিতরণ করা হয়।
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">সন্ধিপূজা:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            মহাষ্টমীর সন্ধ্যায় অনুষ্ঠিত এই পূজা অত্যন্ত গুরুত্বপূর্ণ। অষ্টমী ও নবমীর সন্ধিক্ষণে দেবী দুর্গা মহিষাসুরকে পরাজিত করেন, তাই এই পূজা শক্তির পূজা হিসেবে গণ্য করা হয়। মন্ত্রোচ্চারণের সাথে ১০৮টি প্রদীপ জ্বালিয়ে এবং ১০৮টি পদ্মফুল নিবেদন করে এই পূজা সম্পন্ন করা হয়।
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">ধুনুচি নাচ:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            মহাষ্টমী ও নবমীর রাতে ধুনুচি নাচ অত্যন্ত জনপ্রিয়। এটি এক প্রকার ভক্তিমূলক নৃত্য, যেখানে পোড়ানো নারকেলের শাঁস ধূনিতে জ্বালিয়ে দেবীর সামনে নৃত্য করা হয়। এটি দেবীর প্রতি ভক্তি ও শ্রদ্ধা প্রদর্শনের এক অনন্য উপায়।
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">সিঁদুর খেলা:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            বিজয়া দশমীর দিনে বিবাহিত মহিলারা দেবী দুর্গার মূর্তিতে সিঁদুর পরিয়ে দেন এবং এরপর একে অপরকে সিঁদুর মাখিয়ে খেলা করেন। এটি আনন্দ ও ভালবাসার প্রতীক হিসেবে পালন করা হয়।
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">প্রতিমা বিসর্জন:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            বিসর্জনের সময় সমস্ত ভক্তরা মাকে বিদায় জানিয়ে তাকে জলাশয়ে বিসর্জন দেন। এই সময় সবাই একসঙ্গে ‘আসছে বছর আবার হবে’ স্লোগান দিয়ে মায়ের আগমন কামনা করেন। বিসর্জনের সময় সবাই একে অপরকে ‘শুভ বিজয়া’ জানিয়ে কোলাকুলি করেন।
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">উপসংহার:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            দুর্গা পূজা হল বাঙালির শ্রেষ্ঠ উৎসব, যা শুধুমাত্র ধর্মীয় আচার-অনুষ্ঠানের মধ্যে সীমাবদ্ধ নয়, এটি আমাদের সংস্কৃতি ও ঐতিহ্যের এক অপূর্ব মিলনক্ষেত্র। 
+            মহালয়া থেকে বিজয়া দশমী পর্যন্ত প্রতিটি দিনই বাঙালির জীবনে এক আলাদা অনুভূতি এনে দেয়। পূজার আনন্দ, প্যান্ডেল হপিং, অঞ্জলি, আরতির সুর, ধুনুচি নাচ, 
+            এবং শেষমেশ মায়ের বিসর্জনের সময় ‘আসছে বছর আবার হবে’ এই কথাগুলোই প্রমাণ করে যে, দুর্গা পূজা শুধুমাত্র উৎসব নয়, এটি বাঙালির আত্মার সঙ্গে মিশে থাকা এক অপরিহার্য অনুভূতি।
+        </p>
+    </div>
+    <!--english content-->
+    <div id="englishcontent" class="hidden">
+        <h1 class="bg-[#B22222] text-[#FDF5E6] font-extrabold text-xl text-center mt-4">Durga Puja:</h1>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">Mahalaya: </h2>
+        <p class="font-normal text-[#B22222] cursor-pointer">
+            Durga Puja begins with Mahalaya. Mahalaya marks the end of Pitru Paksha (a period for paying homage to ancestors) and 
+            the beginning of Devi Paksha (the time for the worship of the goddess). On this day, it is a tradition to wake up early 
+            in the morning and listen to Birendra Krishna Bhadra’s recitation of ‘Mahishasuramardini’ on the radio. According to mythology, 
+            on Mahalaya, Goddess Durga descends to Earth from Mount Kailash with her children. From this day onward, the preparations for Durga Puja begin.
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">Maha Shashthi:</h2>
+        <p class="font-normal text-[#B22222] cursor-pointer">
+            Shashthi is the first day of Durga Puja. On this day, the face of Goddess Durga is unveiled in a ceremony known as 'Bodhon' 
+            (invocation). According to legends, King Surath was the first to perform Durga Puja and worshipped the goddess during the 
+            autumn (Sharadiya) season. Bodhon is essentially the invitation to the goddess, marking the start of the worship. 
+            A significant ritual on Shashthi is the ceremonial bath of the 'Kalabou' (a banana tree), symbolizing the wife of Lord Ganesha. 
+            In the evening, the Sandhipuja takes place.
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">Maha Saptami:</h2>
+        <p class="font-normal text-[#B22222] cursor-pointer">
+            Saptami marks the main worship of Goddess Durga. Early in the morning, the Nabapatrika enters the pandal. 
+            Nabapatrika consists of nine different plants, symbolizing the nine forms of Goddess Durga, all tied together with the Kalabou. 
+            The worship of Nabapatrika represents the worship of the goddess in her nine forms. On this day, the main rituals begin, 
+            including the chanting of mantras and offering of 'anjali' (holy offerings). From Saptami onwards, pandal hopping begins, 
+            with the city illuminated with lights and filled with the joy of celebration.
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">Maha Ashtami:</h2>
+        <p class="font-normal text-[#B22222] cursor-pointer">
+            Ashtami is the most significant day of Durga Puja. On this day, the Sandhipuja is performed at the junction of Ashtami and Navami. 
+            According to the legends, it was during this time that Goddess Durga fought Mahishasur and killed Chanda and Munda. 
+            Therefore, this puja holds great spiritual and devotional power. In the morning, the Anjali is offered to the goddess, 
+            which is popularly known as ‘Ashtami’s Anjali.’ In many places, 'Kumari Puja' is performed on this day, 
+            where a young girl is worshipped as the incarnation of the goddess.
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">Maha Navami:</h2>
+        <p class="font-normal text-[#B22222] cursor-pointer">
+            Navami is one of the final days of Durga Puja. On this day, the Maha Navami Bhog (offerings) is presented to Goddess Durga, 
+            followed by Anjali and Arati. At the end of Navami's puja, the famous ‘Dhunochi Naach’ takes place. Both men and women dance 
+            while holding burning dhunochis (incense burners with smoldering coconut husk), which is a mesmerizing sight. On Navami night, 
+            pandal hopping continues, and the city is enveloped in festive joy. 
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">Maha Dashami & Bijoya Dashami:</h2>
+        <p class="font-light text-[#B22222] cursor-pointer">
+            Dashami is the day of farewell. On this day, Goddess Durga returns to Mount Kailash. After all the rituals and worship conclude, 
+            the ‘Devi Visarjan’ (immersion of the idol) takes place. Before immersion, married women apply sindoor (vermilion) to the goddess and 
+            then to each other in a ceremony known as 'Sindoor Khela'. This signifies joy and the wish for a prosperous life. After the rituals, 
+            the idol is immersed in a river or nearby water body. On Bijoya Dashami, people greet each other with "Shubho Bijoya" and exchange sweets.
+        </p>
+        <h2 class="font-medium bg-[#FFD700] text-[#B22222] px-1 py-1 my-2 w-56 rounded-e-full text-center">Rituals and Practices of Durga Puja:</h2>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">Morning Anjali:</h2>
+        <p class="font-normal text-[#B22222] cursor-pointer">
+            The main rituals of the puja generally take place in the morning. Each day, holy offerings or anjali are offered to the goddess. 
+            It is essential to maintain purity during Anjali. Devotees must wear clean clothes while participating in the ritual.
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">Prasad & Bhog:</h2>
+        <p class="font-normal text-[#B22222] cursor-pointer">
+            Every day, offerings (bhog) are made to the goddess. The bhog mainly includes fruits, sweets, and vegetarian dishes. 
+            The offering is made with mantras, and after the puja, the bhog is distributed as prasad to all the devotees.
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">Sandhipuja:</h2>
+        <p class="font-normal text-[#B22222] cursor-pointer">
+            Sandhipuja is performed on the evening of Maha Ashtami, at the junction between Ashtami and Navami. 
+            It is considered a highly auspicious ritual as it marks the moment when Goddess Durga defeated Mahishasura. 
+            During Sandhipuja, 108 lamps are lit, and 108 lotus flowers are offered in devotion.
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">Dhunochi Naach:</h2>
+        <p class="font-normal text-[#B22222] cursor-pointer">
+            Dhunochi Naach is a popular ritual that takes place on the nights of Maha Ashtami and Navami. 
+            It is a devotional dance performed while holding dhunochis (incense burners filled with burning coconut husks) in front of the goddess. 
+            This dance is a unique expression of devotion and joy.
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">Sindoor Khela:</h2>
+        <p class="font-normal text-[#B22222] cursor-pointer">
+            On Bijoya Dashami, married women apply sindoor (vermilion) to the goddess and then playfully smear it on each other. 
+            This ritual symbolizes joy, fertility, and the bond of marriage.
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">Idol Immersion (Visarjan):</h2>
+        <p class="font-normal text-[#B22222] cursor-pointer">
+            During the immersion ceremony, devotees bid farewell to the goddess and immerse her idol in a water body. 
+            This is accompanied by chants of "Asche Bochor Abar Hobe" (We’ll celebrate again next year), as devotees hope for her return in the following year. 
+            After the immersion, people greet each other with "Shubho Bijoya" and exchange warm embraces and sweets.
+        </p>
+        <h2 class="font-medium bg-[#B22222] text-[#FFD700] px-1 py-1 my-2 w-48 rounded-e-full text-center">Conclusion: </h2>
+        <p class="font-normal text-[#B22222] cursor-pointer">
+            Durga Puja is not only a religious festival but also a cultural celebration for Bengalis. From Mahalaya to Bijoya Dashami, 
+            every day brings a unique experience for the devotees. The joy of pandal hopping, offering anjali, the sound of the dhak 
+            (traditional drum), and the final farewell during immersion are all part of a tradition that is deeply embedded in Bengali culture. 
+            This festival embodies the essence of devotion, togetherness, and the triumph of good over evil.
+        </p>
+    </div>
+    <!--home button-->
+    <a class="items-center mx-auto" href="index.html"><button class="text-center bg-[#4B2E2E] p-2 my-4 w-20  rounded-full drop-shadow-lg hover:bg-[#B22222] hover:text-[#FDF5E6]">Home</button></a> 
+    <script src="details.js"></script>
+</body>
+</html>

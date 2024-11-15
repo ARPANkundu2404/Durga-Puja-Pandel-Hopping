@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>durgaPujoPandelHopping</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body class="bg-[#FDF5E6] grid justify-center dark:text-white ">
+    <!--navbar-->
+    <nav id="navbar" class="bg-[#B22222] mx-auto w-screen px-2">
+        <div class="relative flex items-center justify-between">
+            <a href="details.html"><img class="h-8 w-auto rounded-t-full flex flex-shrink-0 items-center" 
+            src="https://images.pexels.com/photos/14007628/pexels-photo-14007628.jpeg?auto=compress&cs=tinysrgb&w=400" alt="logo"></a>
+            <h1 class="font-extrabold font-serif text-[#FFD700] text-xl">আলোয় ভরা শহর!</h1>
+            <div class="hidden md:flex md:items-center md:justify-center">
+                <a href="index.html" class="hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6]">Home</a>
+                <a href="pandels.html" class="hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6]">Pandel</a>
+                <a href="#" class="hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6]">Map</a>
+                <a href="login.html" id="homelogin" class="hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6]">Login</a>
+            </div>
+            <div id="menubar" class="md:hidden">
+                <a href="#"><button class="font-bold text-[#FFD700] hover:w-6 hover:h-6 hover:rounded-full hover:bg-[#4B2E2E]" onclick="showsidebar()">&#9776;</button></a>
+            </div>
+            <div id="sidebar" class="hidden fixed top-0 right-0 h-screen w-[30vh] z-[999] shadow-2xl shadow-[#4B2E2E] flex-col items-start justify-start backdrop-blur-md">
+                <button class="py-1 px-2 text-[#4B2E2E] h-auto font-bold text-3xl" onclick="hidesidebar()">&#10005;</button>
+                <a href="index.html" class="hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 text-[#FFD700] w-full h-auto font-bold text-xl flex items-center gap-x-20 justify-center">Home</a>
+                <a href="pandels.html" class="hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 text-[#FFD700] w-full h-auto font-bold text-xl flex items-center gap-x-20 justify-center">Pandel</a>
+                <a href="#" class="hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 text-[#FFD700] w-full h-auto font-bold text-xl flex items-center gap-x-20 justify-center">Map</a>
+                <a href="login.html" class="hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 text-[#FFD700] w-full h-auto font-bold text-xl flex items-center gap-x-20 justify-center">Sign-in/Sign-up</a>
+            </div>
+        </div>   
+    </nav>
+    <!--hero-->
+    <div id="hero" class="h-[70vh] w-screen lg:flex border border-[#B22222] shadow-2xl shadow-[#4B2E2E]">
+        <div class="md:w-[50%] lg:h-[70vh] w-screen h-[10vh]">
+            <h1 class="font-extrabold text-[#B22222] text-opacity-100 justify-center my-5 text-center text-3xl lg:text-4xl lg:my-40 lg:text-left lg:mx-10">Enjoy this puja with us.</h1>
+            <h3 class="font-medium text-[#B22222] justify-center text-center text-xl lg:my-[-10rem] my-[-1rem] lg:text-left lg:mx-10">Visit 
+               <a class="font-medium text-[#FFD700] text-2xl cursor-pointer" href="#">Kolkata &rarr;</a>
+            </h3>
+        </div>
+        <div id="heroimage" class="lg:w-[50%] lg:h-[70vh] w-screen h-[60vh] relative overflow-hidden">
+            <div id="slider" class="slider flex transition-transform duration-700 ease-in-out">
+                <div class="flex-shrink-0">
+                    <img class="w-screen h-[60vh] my-2 lg:my-0 lg:w-[105.35vh] lg:h-[70vh] object-cover" src="https://images.pexels.com/photos/19124084/pexels-photo-19124084/free-photo-of-man-painting-durga-statue.jpeg?auto=compress&cs=tinysrgb&w=600" alt="maadurga1">
+                </div>
+                <div class="flex-shrink-0">
+                    <img class="w-screen h-[60vh] my-2 lg:my-0 lg:w-[105.35vh] lg:h-[70vh] object-cover" src="https://images.pexels.com/photos/15873619/pexels-photo-15873619/free-photo-of-a-colorful-durga-goddess-statue.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="maadurga2">
+                </div>
+                <div class="flex-shrink-0">
+                    <img class="w-screen h-[60vh] my-2 lg:my-0 lg:w-[105.35vh] lg:h-[70vh] object-cover" src="https://images.pexels.com/photos/18118229/pexels-photo-18118229/free-photo-of-men-sitting-on-a-street-in-front-of-a-sculpture.jpeg?auto=compress&cs=tinysrgb&w=600" alt="maadurga3">
+                </div>
+                <div class="flex-shrink-0">
+                    <img class="w-screen h-[60vh] my-2 lg:my-0 lg:w-[105.35vh] lg:h-[70vh] object-cover" src="https://images.pexels.com/photos/14088854/pexels-photo-14088854.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="maadurga5">
+                </div>
+                <div class="flex-shrink-0">
+                    <img class="w-screen h-[60vh] my-2 lg:my-0 lg:w-[105.35vh] lg:h-[70vh] object-cover" src="https://images.pexels.com/photos/28510853/pexels-photo-28510853/free-photo-of-artisan-creating-clay-idols-in-workshop.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="maadurga6">
+                </div>
+                <div class="flex-shrink-0">
+                    <img class="w-screen h-[60vh] my-2 lg:my-0 lg:w-[105.35vh] lg:h-[70vh] object-cover" src="https://images.pexels.com/photos/14097679/pexels-photo-14097679.jpeg?auto=compress&cs=tinysrgb&w=600" alt="maadurga7">
+                </div>  
+            </div>
+            <button class="absolute top-1/2 left-4 w-10 h-10 transform -translate-y-1/2 bg-[#4B2E2E] text-[#FFD700] opacity-70 rounded-full items-start hover:opacity-100" onclick="prevSlide()">
+                &#10094;
+            </button>
+            <button class="absolute top-1/2 right-4 w-10 h-10  transform -translate-y-1/2 bg-[#4B2E2E] text-[#FFD700] opacity-70 rounded-full items-end hover:opacity-100" onclick="nextSlide()">
+                &#10095;
+            </button>
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
+                <span class="dot w-3 h-3 bg-[#FDF5E6] opacity-60 rounded-full" onclick="currentslide(1)"></span>
+                <span class="dot w-3 h-3 bg-[#FDF5E6] opacity-60 rounded-full" onclick="currentslide(2)"></span>
+                <span class="dot w-3 h-3 bg-[#FDF5E6] opacity-60 rounded-full" onclick="currentslide(3)"></span>
+                <span class="dot w-3 h-3 bg-[#FDF5E6] opacity-60 rounded-full" onclick="currentslide(4)"></span>
+                <span class="dot w-3 h-3 bg-[#FDF5E6] opacity-60 rounded-full" onclick="currentslide(5)"></span>
+                <span class="dot w-3 h-3 bg-[#FDF5E6] opacity-60 rounded-full" onclick="currentslide(6)"></span>
+            </div> 
+            <style>
+                .slider {
+                    transform: translateX(0); 
+                }
+                .dot.active {
+                    background-color: #FFD700;
+                    width: 1rem;
+                    height: 1rem;
+                }
+            </style>       
+        </div>   
+    </div>
+    <!--functionalsection-->
+    <div class="w-screen h-auto md:h-[60vh] flex flex-wrap items-center justify-center md:justify-between space-x-3 md:space-x-0 px-8">
+        <div class="w-40 h-40 rounded-full flex flex-col items-center space-y-1 my-10 md:my-0 hover:w-44 hover:h-44 hover:cursor-pointer">
+            <a href="pandels.html"><img class="object-cover w-40 h-40 rounded-full border border-[#B22222] shadow-lg  shadow-[#4B2E2E] hover:w-44 hover:h-44" src="https://i.pinimg.com/originals/b9/b1/55/b9b155e6b25629664e2e0cef5c59fd3e.png" alt="Pandel"></a>
+            <h1 class="font-semibold text-[#B22222] text-xl md:text-2xl text-center mt-4 hover:text-2xl md:hover:text-3xl">Pandels</h1>
+        </div>
+        <div class="w-40 h-40 rounded-full flex flex-col items-center space-y-1 my-10 md:my-0 hover:w-44 hover:h-44 hover:cursor-pointer">
+            <img class="object-cover w-40 h-40 rounded-full border border-[#B22222] shadow-lg  shadow-[#4B2E2E] hover:w-44 hover:h-44" src="https://img.freepik.com/premium-vector/modern-restaurant-logo-design-template_872774-98.jpg" alt="resturant">
+            <h1 class="font-semibold text-[#B22222] text-xl md:text-2xl text-center mt-4 hover:text-2xl md:hover:text-3xl">Resturants</h1>
+        </div>
+        <div class="w-40 h-40 rounded-full flex flex-col items-center space-y-1 my-10 md:my-0 hover:w-44 hover:h-44 hover:cursor-pointer">
+            <img class="object-cover w-40 h-40 rounded-full border border-[#B22222] shadow-lg  shadow-[#4B2E2E] hover:w-44 hover:h-44" src="https://cdn-icons-png.flaticon.com/512/4781/4781517.png" alt="location">
+            <h1 class="font-semibold text-[#B22222] text-xl md:text-2xl text-center mt-4 hover:text-2xl md:hover:text-3xl">Location</h1>
+        </div>        
+        <div class="w-40 h-40 rounded-full flex flex-col items-center space-y-1 my-10 md:my-0 hover:w-44 hover:h-44 hover:cursor-pointer">
+            <img class="object-cover w-40 h-40 rounded-full border border-[#B22222] shadow-lg  shadow-[#4B2E2E] hover:w-44 hover:h-44" src="https://static.vecteezy.com/system/resources/previews/007/423/328/non_2x/subway-train-in-front-view-black-silhouette-icon-metro-station-glyph-pictogram-symbol-of-underground-station-for-electric-public-transport-icon-logo-metro-isolated-illustration-vector.jpg" alt="metro">
+            <h1 class="font-semibold text-[#B22222] text-xl md:text-2xl text-center mt-4 hover:text-2xl md:hover:text-3xl">Metro Route</h1>
+        </div>
+
+    </div>
+
+    <footer class="bg-[#4B2E2E] text-right font-normal text-[#FFD700]">
+        <p>@copyright durgaPujaPandelHoping 2024</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
