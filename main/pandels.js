@@ -366,8 +366,10 @@ function showPandelDetails(pandelId) {
         <p>Puja Code : ${details.code}</p>
         <p>Address : ${details.address}</p>`;
 
+        const option = document.getElementById("option");
         pandelDetails.classList.remove("hidden");
         pandelDetails.classList.add("flex");
+        option.classList.add("hidden");
         pandelDetails.scrollIntoView({behavior : "smooth", block : "start" });
     } else {
         pandelDetails.innerHTML = `<h1>Opps Sorry to show your requested data.</h1>`    
@@ -376,9 +378,10 @@ function showPandelDetails(pandelId) {
 
 
 function hidePandelDetails() {
-    const pandelDetails = document.getElementById("pandeldetails");
-    const option = document.getElementById("option");
-    pandelDetails.classList.add("hidden");
-    pandelDetails.classList.remove("flex");
-    option.scrollIntoView({behavior : "smooth", block : "start"});
+    const PandelDetails = document.getElementById("pandeldetails");
+    const Option = document.getElementById("option");
+    Option.classList.remove("hidden");
+    PandelDetails.classList.add("hidden");
+    PandelDetails.classList.remove("flex");
+    Option.scrollIntoView({behavior : "smooth", block : "start"});
 }
