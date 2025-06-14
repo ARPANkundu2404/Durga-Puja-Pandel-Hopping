@@ -42,9 +42,13 @@ Browse pandals by city zones, explore details, and plan your hopping route—all
 
 ### 💻 Desktop View
 
+![Desktop Screenshot](https://res.cloudinary.com/dyr6oh3vg/image/upload/v1749886569/Screenshot_2025-06-14_123709_akxwqf.png)
+
 ---
 
 ### 📱 Mobile View
+
+![Mobile Screenshot](https://res.cloudinary.com/dyr6oh3vg/image/upload/v1749886567/Screenshot_2025-06-14_123801_wwimu1.png)
 
 ---
 
