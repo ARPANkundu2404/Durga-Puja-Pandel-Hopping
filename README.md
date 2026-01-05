@@ -143,6 +143,10 @@ cd Durga-Puja-Pandel-Hopping
 npm install
 # or
 yarn install
+````
+
+---
+
 ### Run Locally
 
 ```bash
@@ -150,6 +154,7 @@ npm start
 # or
 yarn start
 Open in browser: `http://localhost:3000`
+```
 
 ---
 
@@ -177,6 +182,10 @@ Durga-Puja-Pandel-Hopping/
 │   └── index.js            # Application entry point
 ├── package.json            # Dependencies and scripts
 └── README.md               # Project documentation
+```
+
+---
+
 ## 🤝 Contributing
 Contributions are welcome.
 
@@ -196,4 +205,4 @@ This project is licensed under the **MIT License**.
 
 ## 🙏 Credits
 **Developed by Arpan Kundu** Inspired by the tradition of Durga Puja and built with modern web technologies.
-````
+
