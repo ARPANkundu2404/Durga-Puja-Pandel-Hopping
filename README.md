@@ -1,52 +1,128 @@
-	# 🪔 Durga Puja Pandel Hopping 🪔
+# 🪔 Durga Puja Pandal Hopping 🪔
 
-A vibrant, mobile-friendly web app to explore and plan your Durga Puja pandal hopping adventure in Kolkata!  
-Discover pandals by zone, view details, and map your festive journey with ease.
+A web-based application designed to help users explore **Durga Puja pandals, nearby restaurants, location details, and metro/transport information** in Kolkata through a structured and easy-to-use interface.
 
-🌐 [**Live Demo**](https://durga-puja-pandel-hopping.onrender.com/)
+🌐 **Live Project:** [https://durga-puja-pandel-hopping.onrender.com/](https://durga-puja-pandel-hopping.onrender.com/)
 
 ---
 
 ## 📖 Table of Contents
 
-- [✨ Overview](#-overview)
-- [🎉 Features](#-features)
-- [🖼️ Screenshots](#-screenshots)
-- [⚡ Getting Started](#-getting-started)
-- [🚀 Usage](#-usage)
-- [📁 Project Structure](#-project-structure)
-- [🤝 Contributing](#-contributing)
-- [📜 License](#-license)
+- [Overview](#-overview)
+- [System Flow](#️-system-flow-based-on-project-flowchart)
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [Getting Started](#-getting-started)
+- [Usage](#-usage)
+- [Project Structure](#-project-structure)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ---
 
 ## ✨ Overview
 
-**Durga Puja Pandel Hopping** is your digital companion for Kolkata’s iconic Durga Puja festival.  
-Browse pandals by city zones, explore details, and plan your hopping route—all in a beautiful, responsive interface.
+**Durga Puja Pandal Hopping** acts as a digital guide during the Durga Puja festival.  
+The application is structured around a central **Home** page from which users can navigate to different modules such as:
+
+- Pandal exploration (zone-wise)
+- Nearby restaurants
+- Location awareness
+- Metro and transport guidance
+- User authentication
+
+The system follows a **simple and traditional flow**, ensuring clarity, maintainability, and usability.
+
+---
+
+## ⚙️ System Flow (Based on Project Flowchart)
+
+### 🔹 Entry Point
+
+- User enters the application → **Home Page**
+
+### 🔹 Navigation (Navbar)
+
+From the Home page, users can navigate to:
+
+- Pandal
+- Location
+- Sign-in / Sign-up
+
+---
+
+### 🏛️ Pandal Module Flow
+
+1.  Home → **Pandal**
+2.  Pandal → **Zone Selection**
+3.  Zone → **List of Pandals**
+4.  Select a Pandal → **Pandal Details**
+5.  Click Address Pin →
+    - Fetch user location
+    - Show **shortest route & direction** using Google Maps API
+
+---
+
+### 🍽️ Restaurant Module Flow
+
+1.  Home → **Restaurant**
+2.  Fetch user location
+3.  Display **list of nearby restaurants**
+4.  Select a restaurant → **Restaurant Details**
+5.  Restaurant data fetched using Google Maps / location-based services
+
+---
+
+### 📍 Location Module
+
+- Detects and displays the user's current location
+- Helps other modules (Restaurant, Direction, Metro) work accurately
+
+---
+
+### 🚇 Metro Module
+
+- Provides nearby:
+  - Metro stations
+  - Railway stations
+  - Bus stops
+- Displays accessible routes and transport information
+- Informational and user-assist focused
+
+---
+
+### 🔐 Authentication Flow
+
+1.  Home → Sign-in / Sign-up
+2.  **Sign-in:**
+    - Login with credentials
+    - Option for **Forgot Password**
+3.  **Sign-up:**
+    - New user registration
+4.  After authentication → Redirect back to Home
 
 ---
 
 ## 🎉 Features
 
-- 📱 **Responsive UI:** Flawless experience on desktop & mobile
-- 🗺️ **Zone-based Browsing:** Pandals organized by city zones
-- 🏛️ **Pandal Details:** Images, descriptions, and locations for each pandal
-- 🧭 **Route Planning:** Plan your hopping journey efficiently
-- 🎠 **Interactive Carousel:** Visual showcase of featured pandals
-- 🧭 **Easy Navigation:** Quick access to Home, Pandal List, Map, and Login
+- Responsive UI for mobile and desktop
+- Zone-wise pandal browsing
+- Detailed pandal information
+- Location-based nearby restaurants
+- Direction and route assistance
+- Metro and transport information
+- Authentication flow (Sign-in / Sign-up / Forgot Password)
+- Clean and modular page structure
 
 ---
 
 ## 🖼️ Screenshots
 
-### 💻 Desktop View
+### Desktop View
 
 ![Desktop Screenshot](https://res.cloudinary.com/dyr6oh3vg/image/upload/v1749886569/Screenshot_2025-06-14_123709_akxwqf.png)
 
----
-
-### 📱 Mobile View
+### Mobile View
 
 ![Mobile Screenshot](https://res.cloudinary.com/dyr6oh3vg/image/upload/v1749886567/Screenshot_2025-06-14_123801_wwimu1.png)
 
@@ -61,59 +137,63 @@ Browse pandals by city zones, explore details, and plan your hopping route—all
 
 ### Installation
 
-git clone https://github.com/ARPANkundu2404/Durga-Puja-Pandel-Hopping.git
+````bash
+git clone [https://github.com/ARPANkundu2404/Durga-Puja-Pandel-Hopping.git](https://github.com/ARPANkundu2404/Durga-Puja-Pandel-Hopping.git)
 cd Durga-Puja-Pandel-Hopping
 npm install
 # or
 yarn install
+### Run Locally
 
-### Running Locally
-
+```bash
 npm start
 # or
 yarn start
-
-Visit [http://localhost:3000](http://localhost:3000) in your browser.
+Open in browser: `http://localhost:3000`
 
 ---
 
 ## 🚀 Usage
-
-- 🏠 **Home:** Welcome banner and featured pandal carousel
-- 🏛️ **Pandel:** Browse all pandals by zone
-- 🗺️ **Map:** Visualize pandal locations and plan your route
-- 🔐 **Login:** User authentication for personalized features (if enabled)
+* **Home:** Central navigation hub
+* **Pandal:** Browse pandals by zone and view details
+* **Restaurant:** Find nearby food options using location
+* **Location:** View current user location
+* **Metro:** Check nearby metro, railway, and bus routes
+* **Login:** Access authentication features
 
 ---
 
 ## 📁 Project Structure
 
+```plaintext
 Durga-Puja-Pandel-Hopping/
-├── public/                # Static assets
+├── public/                 # Static files
 ├── src/
-│   ├── components/        # UI components
-│   ├── pages/             # Main page components
-│   ├── data/              # Pandal data
-│   ├── App.js             # Main app logic
-│   └── index.js           # Entry point
-├── package.json           # Dependencies & scripts
-└── README.md              # Documentation
-
----
-
+│   ├── components/         # Reusable UI components
+│   ├── pages/              # Home, Pandal, Restaurant, Metro, Auth pages
+│   ├── data/               # Zone and pandal data
+│   ├── context/            # Authentication & global state
+│   ├── App.js              # Routing and layout
+│   └── index.js            # Application entry point
+├── package.json            # Dependencies and scripts
+└── README.md               # Project documentation
 ## 🤝 Contributing
+Contributions are welcome.
 
-We welcome contributions!  
-Fork the repo, create a branch, make your changes, and open a pull request. 🙏
+1. **Fork** the repository
+2. **Create** a new branch
+3. **Commit** your changes
+4. **Open** a pull request
+
+Please follow the existing structure and coding standards.
 
 ---
 
 ## 📜 License
-
-Licensed under the MIT License.
+This project is licensed under the **MIT License**.
 
 ---
 
 ## 🙏 Credits
-
-Made with ❤️ by [ARPANkundu2404] and the open source community.
+**Developed by Arpan Kundu** Inspired by the tradition of Durga Puja and built with modern web technologies.
+````
