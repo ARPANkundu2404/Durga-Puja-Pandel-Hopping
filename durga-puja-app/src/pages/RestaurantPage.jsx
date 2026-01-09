@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/useAuth";
 
 const RestaurantPage = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   const fetchNearbyRestaurants = async (lat, lon) => {
     const radius = 800;
@@ -44,6 +48,12 @@ const RestaurantPage = () => {
   ];
 
   const detectLocationAndFetch = () => {
+    if (!isAuthenticated) {
+      alert("Please sign in to access directions and navigation features.");
+      navigate("/login");
+      return;
+    }
+
     if (!navigator.geolocation) {
       setError("Geolocation not supported by your browser");
       return;

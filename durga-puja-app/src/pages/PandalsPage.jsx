@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/useAuth";
 import { pandalData } from "../data/pandalData";
 
 const PandalsPage = () => {
   const [selectedZone, setSelectedZone] = useState(null);
   const [selectedPandal, setSelectedPandal] = useState(null);
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   const zones = [
     {
@@ -31,8 +35,8 @@ const PandalsPage = () => {
   // Pandal Details View
   if (selectedPandal) {
     return (
-      <div className="w-screen min-h-[70vh] flex flex-col items-center justify-center text-center text-[#B22222] p-8">
-        <div className="bg-[#FFD700] rounded-lg p-8 shadow-2xl shadow-[#4B2E2E] max-w-2xl">
+      <div className="w-screen min-h-[70vh] flex flex-col items-center justify-center text-center text-[#4B2E2E] p-8">
+        <div className="bg-linear-to-r from-[#FFCF67]/80 to-[#D3321D]/80 backdrop-blur-md border border-white/20 rounded-lg p-8 shadow-2xl shadow-[#4B2E2E] max-w-2xl">
           <h1 className="text-3xl font-bold mb-4">{selectedPandal.name}</h1>
           <h2 className="text-xl mb-2">
             Zone: {zones.find((z) => z.id === selectedZone)?.name}
@@ -43,6 +47,14 @@ const PandalsPage = () => {
             <span
               className="hover:cursor-pointer"
               onClick={() => {
+                if (!isAuthenticated) {
+                  alert(
+                    "Please sign in to access directions and navigation features."
+                  );
+                  navigate("/login");
+                  return;
+                }
+
                 const query = encodeURIComponent(
                   `${selectedPandal.name}, ${selectedPandal.address}`
                 );
@@ -57,8 +69,16 @@ const PandalsPage = () => {
           </p>
 
           <button
-            className="bg-[#4B2E2E] text-[#FFD700] py-2 px-6 rounded-full hover:bg-[#B22222] transition-colors mb-4 mr-4"
+            className="bg-[#B22222] text-white py-2 px-6 rounded-full hover:bg-[#7f1b1b] transition-colors mb-4 mr-4 shadow-md"
             onClick={() => {
+              if (!isAuthenticated) {
+                alert(
+                  "Please sign in to access directions and navigation features."
+                );
+                navigate("/login");
+                return;
+              }
+
               if (!navigator.geolocation) {
                 alert("Geolocation not supported");
                 return;
@@ -86,7 +106,7 @@ const PandalsPage = () => {
           </button>
 
           <button
-            className="bg-[#4B2E2E] text-[#FFD700] py-2 px-6 rounded-full hover:bg-[#B22222] transition-colors"
+            className="bg-[#B22222] text-white py-2 px-6 rounded-full hover:bg-[#7f1b1b] transition-colors shadow-md"
             onClick={() => setSelectedPandal(null)}
           >
             Back to List
@@ -102,12 +122,12 @@ const PandalsPage = () => {
     return (
       <div className="w-screen min-h-[70vh] p-8">
         <div className="max-w-2xl mx-auto">
-          <div className="bg-[#FFD700] rounded-lg text-center text-[#B22222] shadow-xl shadow-[#4B2E2E] p-6">
+          <div className="bg-linear-to-r from-[#FFCF67]/70 to-[#D3321D]/70 backdrop-blur-md border border-white/20 rounded-lg text-center text-[#4B2E2E] shadow-xl shadow-[#4B2E2E] p-6">
             <h1 className="font-bold italic text-2xl mb-4">
               {zones.find((z) => z.id === selectedZone)?.name}
             </h1>
             <hr className="border-t border-[#B22222] mx-1 rounded-full my-4" />
-            <ul className="marker:text-[#B22222] list-disc pl-8 space-y-3 text-left">
+            <ul className="marker:text-[#4B2E2E] list-disc pl-8 space-y-3 text-left">
               {pandals.map((pandal) => (
                 <li
                   key={pandal.id}
@@ -119,7 +139,7 @@ const PandalsPage = () => {
               ))}
             </ul>
             <button
-              className="mt-6 bg-[#4B2E2E] text-[#FFD700] py-2 px-6 rounded-full hover:bg-[#B22222] transition-colors"
+              className="mt-6 bg-[#B22222] text-white py-2 px-6 rounded-full hover:bg-[#7f1b1b] transition-colors shadow-md"
               onClick={() => setSelectedZone(null)}
             >
               Back to Zones

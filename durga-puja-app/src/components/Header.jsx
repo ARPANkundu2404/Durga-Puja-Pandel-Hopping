@@ -62,9 +62,6 @@ const Header = () => {
     }
   };
 
-  const navLinkClass =
-    "py-2 px-3 font-medium text-[#FDF5E6] rounded-lg transition-colors duration-200 hover:bg-[#4B2E2E]";
-
   return (
     <nav className="bg-[#B22222] w-full px-2">
       <div className="relative flex items-center justify-between">
@@ -111,9 +108,34 @@ const Header = () => {
             {!isAuthenticated ? (
               <Link
                 to="/login"
-                className={`${navLinkClass} hidden md:inline-block`}
+                aria-label="Sign in"
+                className="hidden md:flex items-center justify-center"
               >
-                Sign-in/Sign-up
+                <div
+                  className="
+        w-9 h-9 rounded-full
+        flex items-center justify-center
+        bg-[#FFD700] text-[#B22222]
+        shadow-sm
+        transition-all duration-200
+        hover:scale-105 hover:shadow-md
+      "
+                >
+                  {/* User icon */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-5 h-5"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M12 2a5 5 0 100 10 5 5 0 000-10zm-7 18a7 7 0 0114 0H5z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
               </Link>
             ) : (
               <div className="relative">

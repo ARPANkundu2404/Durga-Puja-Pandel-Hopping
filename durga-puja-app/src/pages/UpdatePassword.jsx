@@ -162,11 +162,10 @@ const UpdatePassword = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#FDF5E6] p-6">
-      <div className="w-full max-w-md bg-[#FFD700] rounded-2xl shadow-2xl p-6">
-        {" "}
+      <div className="w-full max-w-md bg-linear-to-r from-[#FFCF67]/80 to-[#D3321D]/80 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-6">
         {/* Adjusted max-w-2xl to max-w-md */}
         <div className="mb-4">
-          <h1 className="text-2xl font-bold text-[#B22222]">Reset Password</h1>
+          <h1 className="text-2xl font-bold text-[#4B2E2E]">Reset Password</h1>
           <p className="text-sm text-[#4B2E2E]">
             {step === "verify_otp"
               ? `Enter the OTP sent to ${prefilledEmail}.`
@@ -189,7 +188,7 @@ const UpdatePassword = () => {
                     onChange={(e) => handleOtpChange(idx, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(idx, e)}
                     maxLength={1}
-                    className="w-12 h-12 text-center rounded-md border border-[#4B2E2E] focus:outline-none focus:ring-2 focus:ring-[#FFD700] text-xl"
+                    className="w-12 h-12 text-center rounded-md border border-[#4B2E2E] focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] text-xl bg-white/20 backdrop-blur-sm"
                     inputMode="numeric"
                     autoComplete="one-time-code"
                     aria-label={`OTP digit ${idx + 1}`}

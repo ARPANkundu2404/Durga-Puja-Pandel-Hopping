@@ -135,8 +135,8 @@ const LoginPage = () => {
         </div>
       )}
 
-      <div className="w-full max-w-md bg-[#FFD700] p-6 rounded-2xl shadow-2xl shadow-[#8b7777]">
-        <header className="text-4xl text-[#B22222] font-bold mb-6 text-center">
+      <div className="w-full max-w-md bg-linear-to-r from-[#FFCF67]/80 to-[#D3321D]/80 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-2xl shadow-[#8b7777]">
+        <header className="text-4xl text-[#4B2E2E] font-bold mb-6 text-center">
           {isSignup ? "SIGN-UP" : "SIGN-IN"}
         </header>
 
@@ -157,7 +157,7 @@ const LoginPage = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] bg-white"
+                className="w-full px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] bg-white/20 backdrop-blur-sm"
                 placeholder="Enter your name"
                 required
               />
@@ -174,7 +174,7 @@ const LoginPage = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] bg-white"
+              className="w-full px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] bg-white/20 backdrop-blur-sm"
               placeholder="Enter your email"
               required
             />
@@ -191,7 +191,7 @@ const LoginPage = () => {
                 name="mobile"
                 value={formData.mobile}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] bg-white"
+                className="w-full px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] bg-white/20 backdrop-blur-sm"
                 placeholder="Enter your mobile number"
                 required
               />
@@ -221,7 +221,7 @@ const LoginPage = () => {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] bg-white"
+                className="w-full px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] bg-white/20 backdrop-blur-sm"
                 placeholder="Confirm your password"
                 required
               />
