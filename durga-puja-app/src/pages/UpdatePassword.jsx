@@ -161,160 +161,189 @@ const UpdatePassword = () => {
     collectOtpString().length === OTP_LENGTH;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FDF5E6] p-6">
-      <div className="w-full max-w-md bg-linear-to-r from-[#FFCF67]/80 to-[#D3321D]/80 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-6">
-        {/* Adjusted max-w-2xl to max-w-md */}
-        <div className="mb-4">
-          <h1 className="text-2xl font-bold text-[#4B2E2E]">Reset Password</h1>
-          <p className="text-sm text-[#4B2E2E]">
-            {step === "verify_otp"
-              ? `Enter the OTP sent to ${prefilledEmail}.`
-              : "Set your new password."}
-          </p>
-        </div>
-        {step === "verify_otp" && (
-          <form onSubmit={verifyOtp} className="space-y-4">
-            {/* ... OTP input fields remain the same ... */}
-            <div>
-              <label className="block text-sm font-medium text-[#B22222] mb-2">
-                One-Time Password (OTP)
-              </label>
-              <div className="flex gap-2">
-                {Array.from({ length: OTP_LENGTH }).map((_, idx) => (
-                  <input
-                    key={idx}
-                    ref={(el) => (inputsRef.current[idx] = el)}
-                    value={otp[idx]}
-                    onChange={(e) => handleOtpChange(idx, e.target.value)}
-                    onKeyDown={(e) => handleOtpKeyDown(idx, e)}
-                    maxLength={1}
-                    className="w-12 h-12 text-center rounded-md border border-[#4B2E2E] focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] text-xl bg-white/20 backdrop-blur-sm"
-                    inputMode="numeric"
-                    autoComplete="one-time-code"
-                    aria-label={`OTP digit ${idx + 1}`}
-                  />
-                ))}
+    <div className="w-screen h-screen overflow-hidden flex items-center justify-center bg-[#FDF5E6] p-6">
+      <div className="relative w-full max-w-md bg-linear-to-r from-[#FFCF67]/80 to-[#D3321D]/80 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-6 max-h-[90vh]">
+        <button
+          aria-label="Back to login"
+          onClick={() => navigate("/login")}
+          className="absolute left-4 top-4 p-2 rounded-full text-[#4B2E2E] hover:bg-white/20 transition-colors cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M19 12H5" />
+            <path d="M12 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <div className="overflow-y-auto max-h-[78vh] pr-4">
+          <div className="mb-4">
+            <h1 className="text-2xl font-bold text-[#4B2E2E]">
+              Reset Password
+            </h1>
+            <p className="text-sm text-[#4B2E2E]">
+              {step === "verify_otp"
+                ? `Enter the OTP sent to ${prefilledEmail}.`
+                : "Set your new password."}
+            </p>
+          </div>
+          {step === "verify_otp" && (
+            <form onSubmit={verifyOtp} className="space-y-4">
+              {/* ... OTP input fields remain the same ... */}
+              <div>
+                <label className="block text-sm font-medium text-[#B22222] mb-2">
+                  One-Time Password (OTP)
+                </label>
+                <div className="flex gap-2">
+                  {Array.from({ length: OTP_LENGTH }).map((_, idx) => (
+                    <input
+                      key={idx}
+                      ref={(el) => (inputsRef.current[idx] = el)}
+                      value={otp[idx]}
+                      onChange={(e) => handleOtpChange(idx, e.target.value)}
+                      onKeyDown={(e) => handleOtpKeyDown(idx, e)}
+                      maxLength={1}
+                      className="w-12 h-12 text-center rounded-md border border-[#4B2E2E] focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] text-xl bg-white/20 backdrop-blur-sm"
+                      inputMode="numeric"
+                      autoComplete="one-time-code"
+                      aria-label={`OTP digit ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {otpError && (
+                  <div className="text-sm text-[#B22222] mt-2">{otpError}</div>
+                )}
+                {otpSuccess && (
+                  <div className="text-sm text-[#4B2E2E] mt-2">
+                    {otpSuccess}
+                  </div>
+                )}
               </div>
 
-              {otpError && (
-                <div className="text-sm text-[#B22222] mt-2">{otpError}</div>
-              )}
-              {otpSuccess && (
-                <div className="text-sm text-[#4B2E2E] mt-2">{otpSuccess}</div>
-              )}
-            </div>
+              <div className="flex items-center gap-4">
+                <button
+                  type="submit"
+                  disabled={otpLoading}
+                  className={`px-5 py-2 rounded-full text-white font-semibold transition-colors ${
+                    otpLoading
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-[#B22222] hover:bg-[#7f1b1b]"
+                  }`}
+                >
+                  {otpLoading ? "Verifying..." : "Verify OTP"}
+                </button>
 
-            <div className="flex items-center gap-4">
-              <button
-                type="submit"
-                disabled={otpLoading}
-                className={`px-5 py-2 rounded-full text-white font-semibold transition-colors ${
-                  otpLoading
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-[#B22222] hover:bg-[#7f1b1b]"
-                }`}
-              >
-                {otpLoading ? "Verifying..." : "Verify OTP"}
-              </button>
-
-              <button
-                type="button"
-                onClick={async () => {
-                  // Resend OTP: Hit the /api/otps endpoint
-                  setOtpLoading(true);
-                  setOtpError(null);
-                  try {
-                    const res = await api.post("/otps", {
-                      email: prefilledEmail,
-                    });
-                    if (res.ok && (res.status === 200 || res.status === 201)) {
-                      setOtpSuccess("New OTP sent successfully.");
-                    } else {
-                      setOtpError(res.data?.message || "Failed to resend OTP.");
+                <button
+                  type="button"
+                  onClick={async () => {
+                    // Resend OTP: Hit the /api/otps endpoint
+                    setOtpLoading(true);
+                    setOtpError(null);
+                    try {
+                      const res = await api.post("/otps", {
+                        email: prefilledEmail,
+                      });
+                      if (
+                        res.ok &&
+                        (res.status === 200 || res.status === 201)
+                      ) {
+                        setOtpSuccess("New OTP sent successfully.");
+                      } else {
+                        setOtpError(
+                          res.data?.message || "Failed to resend OTP."
+                        );
+                      }
+                    } catch {
+                      setOtpError("Network error during resend request.");
+                    } finally {
+                      setOtpLoading(false);
+                      setTimeout(() => setOtpSuccess(null), 3000);
                     }
-                  } catch {
-                    setOtpError("Network error during resend request.");
-                  } finally {
-                    setOtpLoading(false);
-                    setTimeout(() => setOtpSuccess(null), 3000);
-                  }
-                }}
-                className="text-sm text-[#4B2E2E] underline"
-              >
-                Resend OTP
-              </button>
-            </div>
-          </form>
-        )}
-        {step === "set_password" && (
-          <form onSubmit={handleFinalSubmit} className="space-y-4">
-            {/* ... Password inputs remain the same ... */}
-            <div>
-              <label className="block text-sm font-medium text-[#B22222] mb-2">
-                New Password
-              </label>
-              <PasswordInputWithStrength
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                showStrength={true}
-              />
-            </div>
+                  }}
+                  className="text-sm text-[#4B2E2E] underline"
+                >
+                  Resend OTP
+                </button>
+              </div>
+            </form>
+          )}
+          {step === "set_password" && (
+            <form onSubmit={handleFinalSubmit} className="space-y-4">
+              {/* ... Password inputs remain the same ... */}
+              <div>
+                <label className="block text-sm font-medium text-[#B22222] mb-2">
+                  New Password
+                </label>
+                <PasswordInputWithStrength
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  showStrength={true}
+                />
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium text-[#B22222] mb-2">
-                Confirm New Password
-              </label>
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm your password"
-                className="w-full px-4 py-2 rounded-md border border-[#4B2E2E] focus:outline-none focus:ring-2 focus:ring-[#4B2E2E]"
-                required
-              />
-              {confirmPassword && newPassword !== confirmPassword && (
-                <div className="text-sm text-[#B22222] mt-2">
-                  Passwords do not match.
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-[#B22222] mb-2">
+                  Confirm New Password
+                </label>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm your password"
+                  className="w-full px-4 py-2 rounded-md border border-[#4B2E2E] focus:outline-none focus:ring-2 focus:ring-[#4B2E2E]"
+                  required
+                />
+                {confirmPassword && newPassword !== confirmPassword && (
+                  <div className="text-sm text-[#B22222] mt-2">
+                    Passwords do not match.
+                  </div>
+                )}
+              </div>
+
+              {submitError && (
+                <div className="text-sm text-[#B22222]">{submitError}</div>
               )}
-            </div>
 
-            {submitError && (
-              <div className="text-sm text-[#B22222]">{submitError}</div>
-            )}
+              <div className="flex items-center gap-4">
+                <button
+                  type="submit"
+                  disabled={!canSubmit || submitLoading}
+                  className={`px-5 py-2 rounded-full text-white font-semibold transition-colors ${
+                    submitLoading || !canSubmit
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-[#B22222] hover:bg-[#7f1b1b]"
+                  }`}
+                >
+                  {submitLoading ? "Updating..." : "Submit"}
+                </button>
 
-            <div className="flex items-center gap-4">
-              <button
-                type="submit"
-                disabled={!canSubmit || submitLoading}
-                className={`px-5 py-2 rounded-full text-white font-semibold transition-colors ${
-                  submitLoading || !canSubmit
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-[#B22222] hover:bg-[#7f1b1b]"
-                }`}
-              >
-                {submitLoading ? "Updating..." : "Submit"}
-              </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStep("verify_otp");
+                    setOtp(Array(OTP_LENGTH).fill(""));
+                    if (inputsRef.current[0]) inputsRef.current[0].focus();
+                  }}
+                  className="text-sm text-[#4B2E2E] underline"
+                >
+                  Back to OTP
+                </button>
+              </div>
 
-              <button
-                type="button"
-                onClick={() => {
-                  setStep("verify_otp");
-                  setOtp(Array(OTP_LENGTH).fill(""));
-                  if (inputsRef.current[0]) inputsRef.current[0].focus();
-                }}
-                className="text-sm text-[#4B2E2E] underline"
-              >
-                Back to OTP
-              </button>
-            </div>
-
-            <div className="text-xs text-[#4B2E2E]/80 mt-2">
-              Password must be at least 8 characters, include uppercase,
-              lowercase, a number, and a special symbol.
-            </div>
-          </form>
-        )}
+              <div className="text-xs text-[#4B2E2E]/80 mt-2">
+                Password must be at least 8 characters, include uppercase,
+                lowercase, a number, and a special symbol.
+              </div>
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );

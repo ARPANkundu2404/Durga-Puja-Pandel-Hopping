@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Import Link instead of using <a>
+import { Link, useNavigate } from "react-router-dom"; // Import Link instead of using <a>
 import DetailSection from "../components/DetailSection";
 import data from "../data/durgaPujaDetails.json";
 
 export default function DetailsPage() {
   const [language, setLanguage] = useState("bn"); // default Bengali
   const [contentVisible, setContentVisible] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setContentVisible(false);
@@ -21,17 +22,38 @@ export default function DetailsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDF5E6] text-[#4B2E2E]">
-      <main className="max-w-5xl mx-auto px-4 py-8">
+    <div className="w-screen h-screen overflow-hidden bg-[#FDF5E6] text-[#4B2E2E]">
+      <main className="max-w-5xl mx-auto px-4 py-8 h-full flex flex-col">
         <div
           className={`transition-opacity duration-300 ${
             contentVisible ? "opacity-100" : "opacity-0"
-          }`}
+          } h-full flex flex-col`}
         >
-          <header className="mb-6 flex items-center justify-between">
-            <h1 className="bg-[#B22222] text-[#FDF5E6] font-extrabold text-xl py-2 px-4 rounded-lg">
-              {language === "bn" ? "দুর্গা পূজা:" : "Durga Puja:"}
-            </h1>
+          <header className="mb-6 flex items-center justify-between sticky top-0 z-10 bg-transparent">
+            <div className="flex items-center gap-4">
+              <button
+                aria-label="Back"
+                onClick={() => navigate(-1)}
+                className="p-2 rounded-full text-[#4B2E2E] hover:bg-white/20 transition-colors cursor-pointer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M19 12H5" />
+                  <path d="M12 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <h1 className="bg-linear-to-r from-[#FFCF67]/70 to-[#D3321D]/70 text-[#4B2E2E] font-extrabold text-xl py-2 px-4 rounded-lg backdrop-blur-sm border border-white/20">
+                {language === "bn" ? "দুর্গা পূজা:" : "Durga Puja:"}
+              </h1>
+            </div>
 
             {/* Toggle: pill with sliding dot + rotating icon */}
             <button
@@ -72,43 +94,46 @@ export default function DetailsPage() {
             </button>
           </header>
 
-          {/* Days */}
-          <section aria-label="Days">
-            {days.map((item, idx) => (
-              <DetailSection
-                key={item.id}
-                item={item}
-                language={language}
-                index={idx}
-              />
-            ))}
-          </section>
+          {/* Scrollable content area */}
+          <div className="flex-1 overflow-y-auto">
+            {/* Days */}
+            <section aria-label="Days">
+              {days.map((item, idx) => (
+                <DetailSection
+                  key={item.id}
+                  item={item}
+                  language={language}
+                  index={idx}
+                />
+              ))}
+            </section>
 
-          {/* Rituals heading */}
-          <section className="mt-8">
-            <h2 className="font-medium bg-[#FFD700] text-[#4B2E2E] px-3 py-2 my-4 inline-block rounded-e-full">
-              {language === "bn"
-                ? "দুর্গাপূজার নিয়মাবলি ও আচার:"
-                : "Rituals and Practices of Durga Puja:"}
-            </h2>
+            {/* Rituals heading */}
+            <section className="mt-8">
+              <h2 className="font-medium bg-linear-to-r from-[#FFCF67]/60 to-[#D3321D]/60 text-[#4B2E2E] px-3 py-2 my-4 inline-block rounded-e-full backdrop-blur-sm border border-white/10">
+                {language === "bn"
+                  ? "দুর্গাপূজার নিয়মাবলি ও আচার:"
+                  : "Rituals and Practices of Durga Puja:"}
+              </h2>
 
-            {rituals.map((item, idx) => (
-              <DetailSection
-                key={item.id}
-                item={item}
-                language={language}
-                index={days.length + idx}
-              />
-            ))}
-          </section>
+              {rituals.map((item, idx) => (
+                <DetailSection
+                  key={item.id}
+                  item={item}
+                  language={language}
+                  index={days.length + idx}
+                />
+              ))}
+            </section>
 
-          {/* Home button (using Link instead of <a>) */}
-          <div className="mt-8">
-            <Link to="/" className="inline-block">
-              <button className="bg-[#4B2E2E] text-[#FDF5E6] p-2 rounded-full hover:bg-[#B22222] transition">
-                {language === "bn" ? "হোম" : "Home"}
-              </button>
-            </Link>
+            {/* Home button (using Link instead of <a>) */}
+            <div className="mt-8">
+              <Link to="/" className="inline-block">
+                <button className="bg-[#4B2E2E] text-[#FDF5E6] p-2 rounded-full hover:bg-[#B22222] transition">
+                  {language === "bn" ? "হোম" : "Home"}
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </main>
