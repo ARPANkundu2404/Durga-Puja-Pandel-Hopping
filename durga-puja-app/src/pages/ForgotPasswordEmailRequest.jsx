@@ -71,10 +71,10 @@ const ForgotPasswordEmailRequest = () => {
           </svg>
         </button>
         <div className="overflow-y-auto max-h-[78vh] pr-4">
-          <h2 className="text-2xl font-bold text-[#4B2E2E] mb-2">
+          <h2 className="text-2xl font-bold text-[#4B2E2E] text-center">
             Forgot Password
           </h2>
-          <p className="text-sm text-[#4B2E2E] mb-6">
+          <p className="text-sm text-[#4B2E2E] mt-4 mb-6">
             Enter the email associated with your account. We'll send an OTP to
             reset your password.
           </p>

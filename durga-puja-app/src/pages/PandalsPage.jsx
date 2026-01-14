@@ -125,15 +125,6 @@ const PandalsPage = () => {
             >
               Get Directions 🧭
             </button>
-
-            <div className="mt-4">
-              <button
-                className="bg-[#B22222] text-white py-2 px-6 rounded-full hover:bg-[#7f1b1b] transition-colors shadow-md"
-                onClick={() => setSelectedPandal(null)}
-              >
-                Back
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -182,14 +173,6 @@ const PandalsPage = () => {
                   </li>
                 ))}
               </ul>
-              <div className="mt-6">
-                <button
-                  className="bg-[#B22222] text-white py-2 px-6 rounded-full hover:bg-[#7f1b1b] transition-colors shadow-md"
-                  onClick={() => setSelectedZone(null)}
-                >
-                  Back
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -199,7 +182,7 @@ const PandalsPage = () => {
 
   // Zone Selection View
   return (
-    <div className="w-screen min-h-[70vh] p-10 flex flex-col md:flex-row items-center md:justify-between mt-1 md:mt-[10vh] gap-8">
+    <div className="w-screen h-screen overflow-hidden p-10 flex flex-col md:flex-row items-center md:justify-between mt-1 md:mt-[10vh] gap-8 bg-[#FDF5E6]">
       {zones.map((zone) => (
         <div key={zone.id} className="items-center flex flex-col">
           <div
