@@ -11,6 +11,7 @@ import ForgotPasswordEmailRequest from "./pages/ForgotPasswordEmailRequest";
 import UpdatePassword from "./pages/UpdatePassword";
 import RestaurantPage from "./pages/RestaurantPage";
 import LocationPage from "./pages/LocationPage";
+import MetroPage from "./pages/MetroPage";
 
 // Layout component that wraps the header, main content, and footer
 const Layout = () => {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "map",
         element: <LocationPage />,
+      },
+      {
+        path: "metro",
+        element: <MetroPage />,
       },
     ],
   },
