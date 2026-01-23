@@ -1,0 +1,83 @@
+package com.arpan.durga_puja_hopping.controller;
+
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.arpan.durga_puja_hopping.entity.PandalDtls;
+import com.arpan.durga_puja_hopping.entity.PandalDtls.Status;
+import com.arpan.durga_puja_hopping.entity.UserDtls;
+import com.arpan.durga_puja_hopping.repository.PandalRepository;
+import com.arpan.durga_puja_hopping.repository.UserDtlsRepository;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/api/pandals")
+@RequiredArgsConstructor
+public class PandalController {
+
+    private final PandalRepository pandalRepository;
+    private final UserDtlsRepository userRepository;
+
+    // 1️⃣ AUTHORITY → Create pandal request
+    @PreAuthorize("hasRole('AUTHORITY')")
+    @PostMapping
+    public ResponseEntity<?> createPandal(
+            @RequestBody PandalDtls pandal,
+            Authentication authentication
+    ) {
+        String email = authentication.name();
+        UserDtls authority = userRepository.findByEmail(email)
+                .orElseThrow();
+
+        pandal.setStatus(Status.PENDING);
+        pandal.setCreatedBy(authority);
+
+        return ResponseEntity.ok(pandalRepository.save(pandal));
+    }
+
+    // 2️⃣ PUBLIC → Approved pandals
+    @GetMapping("/approved")
+    public ResponseEntity<List<PandalDtls>> getApprovedPandals() {
+        return ResponseEntity.ok(
+                pandalRepository.findByStatus(Status.APPROVED)
+        );
+    }
+
+    // 3️⃣ AUTHORITY → My pandals
+    @PreAuthorize("hasRole('AUTHORITY')")
+    @GetMapping("/my-pandals")
+    public ResponseEntity<List<PandalDtls>> getMyPandals(
+            Authentication authentication
+    ) {
+        return ResponseEntity.ok(
+                pandalRepository.findByCreatedByEmail(authentication.name())
+        );
+    }
+
+    // 4️⃣ ADMIN → Approve pandal
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{id}/approve")
+    public ResponseEntity<?> approvePandal(@PathVariable Long id) {
+
+        PandalDtls pandal = pandalRepository.findById(id)
+                .orElseThrow();
+
+        pandal.setStatus(Status.APPROVED);
+        return ResponseEntity.ok(pandalRepository.save(pandal));
+    }
+
+    // 5️⃣ ADMIN → Delete pandal
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletePandal(@PathVariable Long id) {
+        pandalRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+}
+

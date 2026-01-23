@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.arpan.durga_puja_hopping.entity.PandelDtls&apos; to &apos;PandalDtls&apos;&#x0D;&#x0A;- Original project: &apos;durga_puja_hopping&apos;&#x0D;&#x0A;- Original element: &apos;com.arpan.durga_puja_hopping.entity.PandelDtls&apos;&#x0D;&#x0A;- Renamed element: &apos;com.arpan.durga_puja_hopping.entity.PandalDtls&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;PandelDtls&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.arpan.durga_puja_hopping.entity{PandelDtls.java[PandelDtls" matchStrategy="1" name="PandalDtls" qualified="false" references="true" similarDeclarations="false" stamp="1768834712524" textual="false" version="1.0"/>
+</session>

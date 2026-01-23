@@ -53,6 +53,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(
 						auth -> auth
 						.requestMatchers(
+								"/api/pandals/approved",
 								"/api/auth/login", 
 								"/api/users", 
 								"/api/otps",

@@ -1,0 +1,117 @@
+package com.arpan.durga_puja_hopping.controller;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+
+import com.arpan.durga_puja_hopping.DurgaPujaHoppingApplication;
+import com.arpan.durga_puja_hopping.entity.PandalDtls;
+import com.arpan.durga_puja_hopping.entity.PandalDtls.Status;
+import com.arpan.durga_puja_hopping.entity.UserDtls;
+import com.arpan.durga_puja_hopping.repository.PandalRepository;
+import com.arpan.durga_puja_hopping.repository.UserDtlsRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/api/pandals")
+@RequiredArgsConstructor
+public class PandalController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(PandalController.class);
+
+    private final PandalRepository pandalRepository;
+    private final UserDtlsRepository userRepository;
+
+    /* ======================================================
+     * 1️⃣ AUTHORITY APIs
+     * ====================================================== */
+
+    /**
+     * Create a new Pandal (Authority only)
+     * Status → PENDING by default
+     */
+    @PostMapping
+    @PreAuthorize("hasRole('AUTHORITY')")
+    public ResponseEntity<PandalDtls> createPandal(
+            @RequestBody PandalDtls pandal,
+            Authentication authentication
+    ) {
+        String email = authentication.getName();
+        UserDtls authority = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Authority not found"));
+
+        pandal.setCreatedBy(authority);
+        pandal.setStatus(Status.PENDING);
+
+        PandalDtls saved = pandalRepository.save(pandal);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
+    /**
+     * Get pandals created by logged-in Authority
+     */
+    @GetMapping("/my-pandals")
+    @PreAuthorize("hasRole('AUTHORITY')")
+    public ResponseEntity<List<PandalDtls>> getMyPandals(
+            Authentication authentication
+    ) {
+        String email = authentication.getName();
+        List<PandalDtls> pandals =
+                pandalRepository.findByCreatedByEmail(email);
+
+        return ResponseEntity.ok(pandals);
+    }
+
+    /* ======================================================
+     * 2️⃣ PUBLIC APIs
+     * ====================================================== */
+
+    /**
+     * Get all APPROVED pandals (Public)
+     */
+    @GetMapping("/approved")
+    public ResponseEntity<List<PandalDtls>> getApprovedPandals() {
+        List<PandalDtls> pandals =
+                pandalRepository.findByStatus(Status.APPROVED);
+
+        return ResponseEntity.ok(pandals);
+    }
+
+    /* ======================================================
+     * 3️⃣ ADMIN APIs
+     * ====================================================== */
+
+    /**
+     * Approve a pandal (Admin only)
+     */
+    @PutMapping("/{id}/approve")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<PandalDtls> approvePandal(
+            @PathVariable Long id
+    ) {
+        PandalDtls pandal = pandalRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pandal not found"));
+
+        pandal.setStatus(Status.APPROVED);
+        return ResponseEntity.ok(pandalRepository.save(pandal));
+    }
+
+    /**
+     * Delete a pandal (Admin only)
+     */
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deletePandal(
+            @PathVariable Long id
+    ) {
+        pandalRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+}

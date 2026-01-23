@@ -5,6 +5,7 @@ async function request(path, { method = "GET", body, headers = {} } = {}) {
     method,
     headers: {
       "Content-Type": "application/json",
+      ...authHeaders(),
       ...headers,
     },
   };
@@ -22,12 +23,20 @@ async function request(path, { method = "GET", body, headers = {} } = {}) {
   return { ok: res.ok, status: res.status, data };
 }
 
+export async function get(path, options = {}) {
+  return request(path, { method: "GET", headers: options.headers });
+}
+
 export async function post(path, body, options = {}) {
   return request(path, { method: "POST", body, headers: options.headers });
 }
 
 export async function put(path, body, options = {}) {
   return request(path, { method: "PUT", body, headers: options.headers });
+}
+
+export async function deleteRequest(path, options = {}) {
+  return request(path, { method: "DELETE", headers: options.headers });
 }
 
 // Simple JWT storage helpers (localStorage)
@@ -61,8 +70,10 @@ export function authHeaders() {
 }
 
 export default {
+  get,
   post,
   put,
+  delete: deleteRequest,
   setToken,
   getToken,
   removeToken,

@@ -1,0 +1,48 @@
+package com.arpan.durga_puja_hopping.dto;
+
+import com.arpan.durga_puja_hopping.entity.PandalDtls.Status;
+
+public class PandalResponse {
+
+    private Long id;
+    private String name;
+    private String address;
+    private String zone;
+    private String details;
+    private Status status;
+
+    // creator info (SAFE subset)
+    private Long createdById;
+    private String createdByName;
+    private String createdByEmail;
+
+    /* ========= GETTERS & SETTERS ========= */
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+
+    public String getZone() { return zone; }
+    public void setZone(String zone) { this.zone = zone; }
+
+    public String getDetails() { return details; }
+    public void setDetails(String details) { this.details = details; }
+
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
+
+    public Long getCreatedById() { return createdById; }
+    public void setCreatedById(Long createdById) { this.createdById = createdById; }
+
+    public String getCreatedByName() { return createdByName; }
+    public void setCreatedByName(String createdByName) { this.createdByName = createdByName; }
+
+    public String getCreatedByEmail() { return createdByEmail; }
+    public void setCreatedByEmail(String createdByEmail) { this.createdByEmail = createdByEmail; }
+}
+

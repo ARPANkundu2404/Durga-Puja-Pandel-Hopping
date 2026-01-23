@@ -3,6 +3,7 @@ package com.arpan.durga_puja_hopping.service.impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,6 +23,9 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
+	
+	@Value("${APP_ADMIN_SECRET}")
+    private String adminSecret;
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -50,35 +54,56 @@ public class UserServiceImpl implements UserService {
                                 .orElseThrow(() -> new RuntimeException("Authenticated user not found in database"));
 
 						String name = userDtls.getName();
+						String rawRole = userDtls.getRole();
 						
-						return jwtService.generateToken(loginRequest.getEmail(), role, name);
+						return jwtService.generateToken(loginRequest.getEmail(), rawRole, name);
 		}
 		return null;
 	}
 
 	@Override
-	public UserDtls getUserByEmail(String email) {
-		Optional<UserDtls> optionalUser = userDtlsRepository.findByEmail(email);
-		if (optionalUser.isEmpty()) {
-			return null;
-		}
-		return optionalUser.get();
-	};
-
-	@Override
 	public UserDtls registerUser(UserAddRequest request) {
-		if (userDtlsRepository.findByEmail(request.getEmail()).isPresent()) {
-			return null;
-		}
 
-		UserDtls user = new UserDtls();
-		user.setEmail(request.getEmail());
-		user.setPassword(passwordEncoder.encode(request.getPassword())); // Encrypt password
-		user.setName(request.getName()); 
-		user.setMobileno(request.getMobileno());
-		
-		return userDtlsRepository.save(user);
+	    if (userDtlsRepository.existsByEmailIgnoreCase(request.getEmail())) {
+	        throw new RuntimeException("Email already registered");
+	    }
+
+	    UserDtls user = new UserDtls();
+	    user.setName(request.getName());
+	    user.setEmail(request.getEmail());
+	    user.setMobileno(request.getMobileno());
+	    user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+	    String role = request.getRole();
+
+        // ✅ Default role
+	    if (role == null || role.isBlank() || "USER".equalsIgnoreCase(role)) {
+	        user.setRole("USER");
+	    }
+        // 🔐 ADMIN with secret validation
+        else if ("ADMIN".equalsIgnoreCase(role)) {
+
+            if (request.getSecretCode() == null ||
+                !passwordEncoder.matches(
+                        request.getSecretCode(),
+                        adminSecret
+                    )) {
+                throw new RuntimeException("Invalid admin secret code");
+            }
+
+            user.setRole("ADMIN");
+        }
+        // AUTHORITY
+        else if ("AUTHORITY".equalsIgnoreCase(role)) {
+            user.setRole("AUTHORITY");
+        }
+        else {
+            throw new RuntimeException("Invalid role requested");
+        }
+
+	    return userDtlsRepository.save(user);
 	}
+
 
 	@Override
 	@Transactional
@@ -102,4 +127,12 @@ public class UserServiceImpl implements UserService {
 
 		return "Password updated successfully";
 	}
+	
+	@Override
+	public UserDtls getUserByEmail(String email) {
+	    return userDtlsRepository.findByEmail(email)
+	            .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
+	}
+
+
 }

@@ -1,0 +1,112 @@
+package com.arpan.durga_puja_hopping.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity
+@Table(name = "pandals")
+public class PandalDtls {
+	
+	public enum Status {
+        PENDING,
+        APPROVED,
+        REJECTED
+    }
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@NotBlank(message = "Name cannot be empty")
+	@Column(nullable = false)
+    private String name;
+
+	@NotBlank(message = "Address cannot be empty")
+    @Column(nullable = false)
+    private String address;
+
+	@NotBlank(message = "Zone cannot be empty")
+    @Column(nullable = false)
+    private String zone;
+
+	@NotBlank(message = "Details cannot be empty")
+    @Column(length = 1000)
+    private String details;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by", nullable = false)
+    @JsonIgnore
+    private UserDtls createdBy;
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getZone() {
+        return zone;
+    }
+
+    public void setZone(String zone) {
+        this.zone = zone;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public UserDtls getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(UserDtls createdBy) {
+        this.createdBy = createdBy;
+    }
+}

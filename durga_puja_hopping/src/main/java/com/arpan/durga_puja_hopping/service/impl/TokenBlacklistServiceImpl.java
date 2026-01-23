@@ -36,7 +36,7 @@ public class TokenBlacklistServiceImpl implements TokenBlacklistService {
     // It deletes all records in blacklisted_tokens where expiry_date < now.
     // This keeps DB clean and avoids unnecessary entries.
 //     @Scheduled(cron = "0 0 * * * ?")
-     @Scheduled(cron = "0 */5 * * * ?") // For 5min testing
+     @Scheduled(cron = "0 */10 * * * ?") // For 10min testing
     @Transactional
     public void removeExpiredTokens() {
         LocalDateTime now = LocalDateTime.now();

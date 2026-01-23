@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, LogOut } from "lucide-react";
+import { Menu, X, LogOut, LayoutDashboard, ShieldCheck } from "lucide-react";
 import { useAuth } from "../context/useAuth";
 import api from "../utils/api";
 
@@ -9,8 +9,10 @@ const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, userEmail, userName, logout } = useAuth();
+  const { isAuthenticated, userEmail, userName, logout, role } = useAuth();
   const [logoutLoading, setLogoutLoading] = useState(false);
+
+  console.log("Current User Role in Header:", role);
 
   // Avatar initial (from name or email)
   const initial =
@@ -32,7 +34,7 @@ const Header = () => {
       // Call backend logout endpoint with JWT token (no body)
       console.debug(
         "Logging out token:",
-        token ? token.slice(0, 8) + "..." : null
+        token ? token.slice(0, 8) + "..." : null,
       );
       const res = await api.post("/auth/logout", undefined, {
         headers: api.authHeaders ? api.authHeaders() : {},
@@ -41,7 +43,7 @@ const Header = () => {
       // If backend forbids the request (e.g., token invalid/blacklisted), still clear local state
       if (res && res.status === 403) {
         console.warn(
-          "Logout returned 403 - token may be invalid or already expired."
+          "Logout returned 403 - token may be invalid or already expired.",
         );
       }
 
@@ -80,7 +82,7 @@ const Header = () => {
         <div className="hidden md:flex md:items-center md:justify-center">
           <Link
             to="/"
-            className={`hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6] ${
+            className={`hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6] transition-colors ${
               location.pathname === "/" ? "bg-[#4B2E2E]" : ""
             }`}
           >
@@ -88,7 +90,7 @@ const Header = () => {
           </Link>
           <Link
             to="/pandals"
-            className={`hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6] ${
+            className={`hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6] transition-colors ${
               location.pathname === "/pandals" ? "bg-[#4B2E2E]" : ""
             }`}
           >
@@ -96,7 +98,7 @@ const Header = () => {
           </Link>
           <Link
             to="/map"
-            className={`hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6] ${
+            className={`hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6] transition-colors ${
               location.pathname === "/map" ? "bg-[#4B2E2E]" : ""
             }`}
           >
@@ -111,16 +113,7 @@ const Header = () => {
                 aria-label="Sign in"
                 className="hidden md:flex items-center justify-center"
               >
-                <div
-                  className="
-        w-9 h-9 rounded-full
-        flex items-center justify-center
-        bg-[#FFD700] text-[#B22222]
-        shadow-sm
-        transition-all duration-200
-        hover:scale-105 hover:shadow-md
-      "
-                >
+                <div className="w-9 h-9 rounded-full flex items-center justify-center bg-[#FFD700] text-[#B22222] shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-md">
                   {/* User icon */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -172,13 +165,39 @@ const Header = () => {
                   aria-hidden={!dropdownOpen}
                 >
                   <div className="bg-[#B22222] border border-[#FFD700] rounded-lg shadow-lg overflow-hidden">
+                    {/* Email Header */}
                     <div className="px-4 py-3 text-sm text-[#FFD700] border-b border-[#FFD700]">
                       {userEmail}
                     </div>
+
+                    {/* Conditional Role-Based Links */}
+                    {role === "AUTHORITY" && (
+                      <Link
+                        to="/authority"
+                        onClick={() => setDropdownOpen(false)}
+                        className="px-4 py-2 text-[#FDF5E6] hover:bg-[#4B2E2E] transition-colors duration-200 flex items-center gap-2 border-b border-[#FFD700]/30"
+                      >
+                        <LayoutDashboard size={16} />
+                        My Pandal Dashboard
+                      </Link>
+                    )}
+
+                    {role === "ADMIN" && (
+                      <Link
+                        to="/admin"
+                        onClick={() => setDropdownOpen(false)}
+                        className="px-4 py-2 text-[#FDF5E6] hover:bg-[#4B2E2E] transition-colors duration-200 flex items-center gap-2 border-b border-[#FFD700]/30"
+                      >
+                        <ShieldCheck size={16} />
+                        Admin Panel
+                      </Link>
+                    )}
+
+                    {/* Sign Out Button */}
                     <button
                       onClick={handleLogout}
                       disabled={logoutLoading}
-                      className="w-full text-left px-4 py-2 text-[#FDF5E6] hover:bg-[#4B2E2E] flex items-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full text-left px-4 py-2 text-[#FDF5E6] hover:bg-[#4B2E2E] flex items-center gap-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <LogOut size={16} />
                       {logoutLoading ? "Signing Out..." : "Sign Out"}
@@ -280,12 +299,35 @@ const Header = () => {
               <div className="w-full py-2 px-3 text-[#4B2E2E] font-bold text-sm border-t border-[#4B2E2E] mt-2">
                 {userEmail}
               </div>
+
+              {role === "AUTHORITY" && (
+                <Link
+                  to="/authority"
+                  onClick={() => setSidebarOpen(false)}
+                  className="py-2 px-3 text-[#4B2E2E] font-bold text-lg rounded-lg transition-colors duration-200 hover:bg-[#4B2E2E] hover:text-[#FFD700] flex items-center justify-center gap-2"
+                >
+                  <LayoutDashboard size={18} />
+                  My Pandal Dashboard
+                </Link>
+              )}
+
+              {role === "ADMIN" && (
+                <Link
+                  to="/admin"
+                  onClick={() => setSidebarOpen(false)}
+                  className="py-2 px-3 text-[#4B2E2E] font-bold text-lg rounded-lg transition-colors duration-200 hover:bg-[#4B2E2E] hover:text-[#FFD700] flex items-center justify-center gap-2"
+                >
+                  <ShieldCheck size={18} />
+                  Admin Panel
+                </Link>
+              )}
+
               <button
                 onClick={handleLogout}
                 disabled={logoutLoading}
-                className="w-full text-left px-3 py-2 text-[#B22222] hover:bg-[#4B2E2E] hover:text-[#FFD700] font-bold flex items-center justify-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                className="w-full mt-2 px-3 py-2 text-[#4B2E2E] font-bold text-lg rounded-lg transition-colors duration-200 hover:bg-[#4B2E2E] hover:text-[#FFD700] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <LogOut size={16} />
+                <LogOut size={18} />
                 {logoutLoading ? "Signing Out..." : "Sign Out"}
               </button>
             </>

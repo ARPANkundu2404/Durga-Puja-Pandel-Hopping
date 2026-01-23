@@ -1,0 +1,163 @@
+package com.arpan.durga_puja_hopping.controller;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+
+import com.arpan.durga_puja_hopping.dto.PandalCreateRequest;
+import com.arpan.durga_puja_hopping.entity.PandalDtls;
+import com.arpan.durga_puja_hopping.entity.PandalDtls.Status;
+import com.arpan.durga_puja_hopping.entity.UserDtls;
+import com.arpan.durga_puja_hopping.repository.PandalRepository;
+import com.arpan.durga_puja_hopping.repository.UserDtlsRepository;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/api/pandals")
+@RequiredArgsConstructor //constructor injection
+public class PandalController {
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(PandalController.class);
+
+    private final PandalRepository pandalRepository;
+    private final UserDtlsRepository userRepository;
+
+    /* ======================================================
+     * 1️⃣ AUTHORITY APIs
+     * ====================================================== */
+
+    @Operation(
+        summary = "Create new pandal request",
+        description = "Authority submits a new pandal. Status is set to PENDING."
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Pandal request created successfully"),
+        @ApiResponse(responseCode = "403", description = "Access denied – Authority only"),
+        @ApiResponse(responseCode = "401", description = "Unauthorized")
+    })
+    @PostMapping
+    @PreAuthorize("hasRole('AUTHORITY')")
+    public ResponseEntity<PandalDtls> createPandal(
+            @RequestBody PandalCreateRequest request,
+            Authentication authentication
+    ) {
+        logger.info("Authority {} creating pandal", authentication.getName());
+
+        UserDtls authority = userRepository
+                .findByEmail(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("Authority not found"));
+
+        PandalDtls pandal = new PandalDtls();
+        pandal.setName(request.getName());
+        pandal.setAddress(request.getAddress());
+        pandal.setZone(request.getZone());
+        pandal.setDetails(request.getDetails());
+
+        // 🔐 SERVER-CONTROLLED FIELDS
+        pandal.setCreatedBy(authority);
+        pandal.setStatus(Status.PENDING);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(pandalRepository.save(pandal));
+    }
+
+    @Operation(
+        summary = "Get pandals created by authority",
+        description = "Returns all pandals submitted by the logged-in Authority"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Pandals retrieved successfully"),
+        @ApiResponse(responseCode = "403", description = "Access denied – Authority only")
+    })
+    @GetMapping("/my-pandals")
+    @PreAuthorize("hasRole('AUTHORITY')")
+    public ResponseEntity<List<PandalDtls>> getMyPandals(
+            Authentication authentication
+    ) {
+        logger.info("GET /api/pandals/my-pandals called by {}", authentication.getName());
+
+        List<PandalDtls> pandals =
+                pandalRepository.findByCreatedByEmail(authentication.getName());
+
+        return ResponseEntity.ok(pandals);
+    }
+
+    /* ======================================================
+     * 2️⃣ PUBLIC APIs
+     * ====================================================== */
+
+    @Operation(
+        summary = "Get approved pandals",
+        description = "Public API to fetch all APPROVED pandals"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Approved pandals retrieved")
+    })
+    @GetMapping("/approved")
+    public ResponseEntity<List<PandalDtls>> getApprovedPandals() {
+        logger.info("GET /api/pandals/approved called (public)");
+
+        List<PandalDtls> pandals =
+                pandalRepository.findByStatus(Status.APPROVED);
+
+        return ResponseEntity.ok(pandals);
+    }
+
+    /* ======================================================
+     * 3️⃣ ADMIN APIs
+     * ====================================================== */
+
+    @Operation(
+        summary = "Approve a pandal",
+        description = "Admin approves a pandal request"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Pandal approved successfully"),
+        @ApiResponse(responseCode = "403", description = "Access denied – Admin only"),
+        @ApiResponse(responseCode = "404", description = "Pandal not found")
+    })
+    @PutMapping("/{id}/approve")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<PandalDtls> approvePandal(
+            @PathVariable Long id
+    ) {
+        logger.info("PUT /api/pandals/{}/approve called by ADMIN", id);
+
+        PandalDtls pandal = pandalRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pandal not found"));
+
+        pandal.setStatus(Status.APPROVED);
+        return ResponseEntity.ok(pandalRepository.save(pandal));
+    }
+
+    @Operation(
+        summary = "Delete a pandal",
+        description = "Admin deletes any pandal"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Pandal deleted successfully"),
+        @ApiResponse(responseCode = "403", description = "Access denied – Admin only")
+    })
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deletePandal(
+            @PathVariable Long id
+    ) {
+        logger.warn("DELETE /api/pandals/{} called by ADMIN", id);
+
+        pandalRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+}

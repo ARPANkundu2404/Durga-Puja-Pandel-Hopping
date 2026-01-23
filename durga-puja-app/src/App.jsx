@@ -12,6 +12,8 @@ import UpdatePassword from "./pages/UpdatePassword";
 import RestaurantPage from "./pages/RestaurantPage";
 import LocationPage from "./pages/LocationPage";
 import MetroPage from "./pages/MetroPage";
+import AuthorityDashboard from "./pages/AuthorityDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 
 // Layout component that wraps the header, main content, and footer
 const Layout = () => {
@@ -67,6 +69,14 @@ const router = createBrowserRouter([
       {
         path: "metro",
         element: <MetroPage />,
+      },
+      {
+        path: "authority",
+        element: <AuthorityDashboard />,
+      },
+      {
+        path: "admin",
+        element: <AdminDashboard />,
       },
     ],
   },

@@ -13,6 +13,8 @@ const LoginPage = () => {
     mobile: "",
     password: "",
     confirmPassword: "",
+    role: "USER",
+    secretCode: "",
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -62,6 +64,8 @@ const LoginPage = () => {
       email: formData.email,
       mobileno: formData.mobile, // Note: backend uses 'mobileno'
       password: formData.password,
+      role: formData.role,
+      secretCode: formData.role === "ADMIN" ? formData.secretCode : null,
     };
     try {
       const res = await api.post("/users", userAddRequest);
@@ -83,35 +87,29 @@ const LoginPage = () => {
     }
   };
 
+  // src/pages/LoginPage.jsx
+
   const handleSignin = async () => {
     setLoading(true);
-    setError(null);
-    const loginRequest = {
-      email: formData.email,
-      password: formData.password,
-    };
-
     try {
+      const loginRequest = {
+        email: formData.email,
+        password: formData.password,
+      };
       const res = await api.post("/auth/login", loginRequest);
-      if (res.ok && (res.status === 200 || res.status === 201)) {
-        const token = res.data?.data?.token || res.data?.token;
-        const email = formData.email;
-        let name =
-          res.data?.data?.name ||
-          res.data?.data?.username ||
-          res.data?.name ||
-          "";
-        if (token) {
-          login(token, email, name);
-        }
+
+      // Check for nested data object
+      if (res.ok && res.data && res.data.data) {
+        const payload = res.data.data; // This contains token, role, etc.
+
+        // Pass properties from the inner data object
+        login(payload.token, payload.email, payload.name, payload.role);
         navigate("/");
-      } else if (res.status === 401) {
-        setError(res.data?.message || "Invalid credentials.");
       } else {
-        setError(res.data?.message || "Sign in failed.");
+        setError(res.data?.message || "Invalid email or password");
       }
     } catch {
-      setError("Network error. Could not complete sign in.");
+      setError("Connection error. Try again.");
     } finally {
       setLoading(false);
     }
@@ -128,13 +126,6 @@ const LoginPage = () => {
 
   return (
     <div className="w-screen h-screen overflow-hidden flex items-center justify-center bg-[#FDF5E6] py-8 px-4">
-      {/* ✅ Success Toast */}
-      {showSuccess && (
-        <div className="fixed top-6 right-6 bg-[#4B2E2E] text-[#FFD700] text-sm px-4 py-2 rounded-md shadow-lg transition-opacity animate-fadeIn z-50">
-          {successMessage}
-        </div>
-      )}
-
       <div className="relative w-full max-w-md bg-linear-to-r from-[#FFCF67]/80 to-[#D3321D]/80 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-2xl shadow-[#8b7777] max-h-[90vh]">
         <button
           aria-label="Back"
@@ -159,6 +150,19 @@ const LoginPage = () => {
           <header className="text-4xl text-[#4B2E2E] font-bold mb-6 text-center">
             {isSignup ? "SIGN-UP" : "SIGN-IN"}
           </header>
+
+          {/* ✅ Success Toast */}
+          {showSuccess && (
+            <div className="fixed top-6 right-6 bg-[#FFD700] text-[#22ff00] text-sm px-4 py-2 rounded-md shadow-lg transition-opacity animate-fadeIn z-50">
+              {successMessage}
+            </div>
+          )}
+
+          {error && (
+            <div className="mb-4 p-2 bg-red-100 text-red-700 text-sm rounded text-center border border-red-200">
+              {error}
+            </div>
+          )}
 
           <form
             onSubmit={handleSubmit}
@@ -218,17 +222,60 @@ const LoginPage = () => {
               </div>
             )}
 
+            {/* --- Register As (Role Selection) --- */}
+            {isSignup && (
+              <>
+                <div>
+                  <label className="block font-medium text-[#B22222] mb-2">
+                    Register As
+                  </label>
+                  <select
+                    name="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#4B2E2E] bg-white/20 backdrop-blur-sm text-[#4B2E2E] outline-none cursor-pointer"
+                    required
+                  >
+                    <option value="USER" className="bg-[#FFCF67]">
+                      Visitor (User)
+                    </option>
+                    <option value="AUTHORITY" className="bg-[#FFCF67]">
+                      Pandal Authority
+                    </option>
+                    <option value="ADMIN" className="bg-[#FFCF67]">
+                      System Admin
+                    </option>
+                  </select>
+                </div>
+                {formData.role === "ADMIN" && (
+                  <div className="animate-fadeIn">
+                    <label className="block text-[#B22222] font-bold mb-1 italic">
+                      Admin Secret Code
+                    </label>
+                    <input
+                      type="password"
+                      name="secretCode"
+                      value={formData.secretCode}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-2 rounded-lg border-2 border-[#B22222] bg-white/40 backdrop-blur-sm text-[#4B2E2E] outline-none focus:bg-white/60"
+                      placeholder="Enter private master key"
+                    />
+                  </div>
+                )}
+              </>
+            )}
+
             {/* --- Password --- */}
-            <div>
-              <PasswordInputWithStrength
-                value={formData.password}
-                onChange={(e) => {
-                  setFormData({ ...formData, password: e.target.value });
-                  setError(null);
-                }}
-                showStrength={isSignup}
-              />
-            </div>
+
+            <PasswordInputWithStrength
+              value={formData.password}
+              onChange={(e) => {
+                setFormData({ ...formData, password: e.target.value });
+                setError(null);
+              }}
+              showStrength={isSignup}
+            />
 
             {/* --- Confirm Password --- */}
             {isSignup && (
@@ -293,8 +340,8 @@ const LoginPage = () => {
                   ? "Signing Up..."
                   : "Signing In..."
                 : isSignup
-                ? "Sign Up"
-                : "Sign In"}
+                  ? "Sign Up"
+                  : "Sign In"}
             </button>
           </form>
 

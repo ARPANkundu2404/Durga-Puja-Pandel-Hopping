@@ -1,0 +1,28 @@
+package com.arpan.durga_puja_hopping.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@Table(name = "pandels")
+public class PandelDtls {
+	
+	 @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private Long id;
+
+	    private String name;
+	    private String address;
+	    private Double lat;
+	    private Double lng;
+	    private String zone;
+
+}

@@ -21,4 +21,9 @@ public class UserAddRequest {
 	@Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?\":{}|<>]).{8,}$",
     message = "Password must be at least 8 characters long and contain uppercase, lowercase, number, and special character.")
 	private String password;
+
+	@NotBlank(message = "Role cannot be empty")
+	private String role; 
+	
+	private String secretCode;
 }

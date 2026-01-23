@@ -14,17 +14,20 @@ export const AuthProvider = ({ children }) => {
   const [userName, setUserName] = useState("");
   const [jwtToken, setJwtToken] = useState("");
   const [loading, setLoading] = useState(true); // Track if context is initializing
+  const [role, setRole] = useState("");
 
   // Initialize auth state from localStorage on mount
   useEffect(() => {
     const token = api.getToken();
-    const email = localStorage.getItem("userEmail") || "";
-    const name = localStorage.getItem("userName") || "";
+    const email = localStorage.getItem("userEmail");
+    const name = localStorage.getItem("userName") ;
+    const savedRole = localStorage.getItem("userRole") ;
 
     if (token && email) {
       setJwtToken(token);
       setUserEmail(email);
-      setUserName(name);
+      setUserName(name || "");
+      setRole(savedRole || "");
       setIsAuthenticated(true);
     }
     setLoading(false);
@@ -36,15 +39,17 @@ export const AuthProvider = ({ children }) => {
    * @param {string} email - User email
    * @param {string} name - User name (optional)
    */
-  const login = (token, email, name = "") => {
-    api.setToken(token);
-    localStorage.setItem("userEmail", email);
-    localStorage.setItem("userName", name || "");
-    setJwtToken(token);
-    setUserEmail(email);
-    setUserName(name || "");
-    setIsAuthenticated(true);
-  };
+  
+  const login = (token, email, name = "", role = "") => {
+  api.setToken(token);
+  localStorage.setItem("userEmail", email);
+  localStorage.setItem("userName", name);
+  localStorage.setItem("userRole", role);
+  setUserEmail(email);
+  setUserName(name);
+  setRole(role);
+  setIsAuthenticated(true);
+};
 
   /**
    * Logout function: clears user data and JWT
@@ -56,6 +61,7 @@ export const AuthProvider = ({ children }) => {
     setJwtToken("");
     setUserEmail("");
     setUserName("");
+    setRole("");
     setIsAuthenticated(false);
   };
 
@@ -65,6 +71,7 @@ export const AuthProvider = ({ children }) => {
     userName,
     jwtToken,
     loading,
+    role,
     login,
     logout,
   };

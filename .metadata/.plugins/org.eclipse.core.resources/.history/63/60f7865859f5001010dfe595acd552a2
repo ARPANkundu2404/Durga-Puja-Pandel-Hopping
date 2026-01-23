@@ -1,0 +1,5 @@
+package com.arpan.durga_puja_hopping.repository;
+
+public interface PandalRepository {
+
+}

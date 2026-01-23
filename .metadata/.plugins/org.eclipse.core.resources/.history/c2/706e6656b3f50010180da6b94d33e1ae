@@ -1,0 +1,15 @@
+package com.arpan.durga_puja_hopping.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.arpan.durga_puja_hopping.entity.PandalDtls;
+import com.arpan.durga_puja_hopping.entity.PandalDtls.Status;
+
+@Repository
+public interface PandalRepository extends JpaRepository<PandalDtls, Long> {
+    List<PandalDtls> findByStatus(Status status);
+    List<PandalDtls> findByCreatedByEmail(String email);
+}
