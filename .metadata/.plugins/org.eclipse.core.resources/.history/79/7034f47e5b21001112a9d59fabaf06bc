@@ -1,0 +1,16 @@
+SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/durgaPujaDEV
+SPRING_DATASOURCE_PRODURL=jdbc:postgresql://localhost:5432/durgaPujaPROD
+SPRING_DATASOURCE_UATURL=jdbc:postgresql://localhost:5432/durgaPujaUAT
+
+SPRING_DATASOURCE_USERNAME=postgres
+SPRING_DATASOURCE_PASSWORD=0506@Carpan
+
+
+JWT_SECRET=56wbzjO4rg7jqhfEuU4ZCRN+q4Heo2yaGNmSI7Ms69g=
+
+
+MAIL_USERNAME=kunduarpan2404@gmail.com
+MAIL_PASSWORD=lafb xqkp zujr aqeb
+
+
+APP_ADMIN_SECRET=$$2a$$12$$Gyd3h41bknhGZL3z1UNBl.Z/EOzagRTzCwPphpatly1Sh25olBJre

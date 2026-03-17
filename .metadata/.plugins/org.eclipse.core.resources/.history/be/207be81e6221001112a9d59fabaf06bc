@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: durga-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 0506@Carpan
+      POSTGRES_DB: durgaPujaDEV
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: durgaPuja-backend
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: DEV
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/durgaPujaDEV
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 0506@Carpan
+      JWT_SECRET: 56wbzjO4rg7jqhfEuU4ZCRN+q4Heo2yaGNmSI7Ms69g=
+      MAIL_USERNAME: kunduarpan2404@gmail.com
+      MAIL_PASSWORD: "lafb xqkp zujr aqeb"
+      APP_ADMIN_SECRET: ${APP_ADMIN_SECRET}
+
+volumes:
+  postgres_data:
