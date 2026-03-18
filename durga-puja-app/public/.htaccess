@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # Exclude direct file requests and directories
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  
+  # Rewrite all requests to index.html for SPA routing
+  RewriteRule ^ index.html [QSA,L]
+</IfModule>
