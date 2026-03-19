@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, LogOut, LayoutDashboard, ShieldCheck } from "lucide-react";
 import { useAuth } from "../context/useAuth";
 import api from "../utils/api";
+import logo from "../assets/logo.png";
 
 const Header = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -66,52 +67,61 @@ const Header = () => {
 
   return (
     <nav className="bg-[#B22222] w-full px-2">
-      <div className="relative flex items-center justify-between">
-        <Link to="/details">
-          <img
-            className="h-8 w-auto rounded-t-full flex shrink-0"
-            src="https://images.pexels.com/photos/14007628/pexels-photo-14007628.jpeg?auto=compress&cs=tinysrgb&w=400"
-            alt="logo"
-          />
-        </Link>
-        <h1 className="font-extrabold font-serif text-[#FFD700] text-xl">
+      <div className="relative flex items-center justify-between h-14">
+        {/* Left: Logo */}
+        <div className="flex items-center flex-shrink-0">
+          <Link to="/details">
+            <div className="bg-[#FDF5E6] rounded-full p-1 shadow-md border border-[#FFD700] hover:scale-105 transition-all duration-200">
+              <img
+                className="h-7 w-7 rounded-full object-cover shrink-0"
+                src={logo}
+                alt="logo"
+              />
+            </div>
+          </Link>
+        </div>
+
+        {/* Center: Title */}
+        <h1 className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-extrabold font-serif text-[#FFD700] text-xl whitespace-nowrap">
           আলোয় ভরা শহর!
         </h1>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex md:items-center md:justify-center">
-          <Link
-            to="/"
-            className={`hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6] transition-colors ${
-              location.pathname === "/" ? "bg-[#4B2E2E]" : ""
-            }`}
-          >
-            Home
-          </Link>
-          <Link
-            to="/pandals"
-            className={`hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6] transition-colors ${
-              location.pathname === "/pandals" ? "bg-[#4B2E2E]" : ""
-            }`}
-          >
-            Pandel
-          </Link>
-          <Link
-            to="/map"
-            className={`hover:rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer py-2 px-3 font-medium text-[#FDF5E6] transition-colors ${
-              location.pathname === "/map" ? "bg-[#4B2E2E]" : ""
-            }`}
-          >
-            Map
-          </Link>
+        {/* Right: Nav Links + Avatar + Hamburger */}
+        <div className="flex items-center gap-3 md:gap-5 flex-shrink-0">
+          <div className="hidden md:flex items-center gap-3 md:gap-5">
+            <Link
+              to="/"
+              className={`rounded-lg py-2 px-3 font-medium text-[#FDF5E6] transition-all duration-200 hover:bg-[#4B2E2E] hover:shadow-md ${
+                location.pathname === "/" ? "bg-[#4B2E2E]/70" : ""
+              }`}
+            >
+              Home
+            </Link>
+            <Link
+              to="/pandals"
+              className={`rounded-lg py-2 px-3 font-medium text-[#FDF5E6] transition-all duration-200 hover:bg-[#4B2E2E] hover:shadow-md ${
+                location.pathname === "/pandals" ? "bg-[#4B2E2E]/70" : ""
+              }`}
+            >
+              Pandel
+            </Link>
+            <Link
+              to="/map"
+              className={`rounded-lg py-2 px-3 font-medium text-[#FDF5E6] transition-all duration-200 hover:bg-[#4B2E2E] hover:shadow-md ${
+                location.pathname === "/map" ? "bg-[#4B2E2E]/70" : ""
+              }`}
+            >
+              Map
+            </Link>
+          </div>
 
-          {/* User Section - Desktop */}
-          <div className="flex items-center gap-3">
+          {/* Avatar / login (desktop only) */}
+          <div className="hidden md:flex items-center">
             {!isAuthenticated ? (
               <Link
                 to="/login"
                 aria-label="Sign in"
-                className="hidden md:flex items-center justify-center"
+                className="flex items-center justify-center"
               >
                 <div className="w-9 h-9 rounded-full flex items-center justify-center bg-[#FFD700] text-[#B22222] shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-md">
                   {/* User icon */}
@@ -155,12 +165,12 @@ const Header = () => {
                 {/* Animated dropdown - stays in DOM for smooth transition */}
                 <div
                   className={`absolute right-0 mt-3 w-56 rounded-lg z-50 transform transition-all duration-300 origin-top-right
-                  ${
-                    dropdownOpen
-                      ? "opacity-100 translate-y-0 pointer-events-auto"
-                      : "opacity-0 translate-y-2 pointer-events-none"
-                  }
-                `}
+                    ${
+                      dropdownOpen
+                        ? "opacity-100 translate-y-0 pointer-events-auto"
+                        : "opacity-0 translate-y-2 pointer-events-none"
+                    }
+                  `}
                   role="menu"
                   aria-hidden={!dropdownOpen}
                 >

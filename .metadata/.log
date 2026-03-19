@@ -8835,3 +8835,33 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.lsp4e 1 0 2026-03-18 20:19:40.990
 !MESSAGE [Info]	[streamChoices] solution 0 returned. finish reason: [stop]
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-18 21:55:01.366
+!MESSAGE [Info] Document is null for editor: DurgaPujaHoppingApplication.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-18 21:55:01.371
+!MESSAGE [Info] Completion handler is refreshed for the document: file:///D:/Project/durgaPujoHopping/durga_puja_hopping/src/main/java/com/arpan/durga_puja_hopping/DurgaPujaHoppingApplication.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-18 21:55:01.436
+!MESSAGE [Info] Document is null for editor: OpenAPIConfig.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-18 21:55:01.436
+!MESSAGE [Info] Completion handler is refreshed for the document: file:///D:/Project/durgaPujoHopping/durga_puja_hopping/src/main/java/com/arpan/durga_puja_hopping/config/OpenAPIConfig.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-18 21:55:01.461
+!MESSAGE [Info] Document is null for editor: GlobalCorsConfig.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-18 21:55:01.462
+!MESSAGE [Info] Completion handler is refreshed for the document: file:///D:/Project/durgaPujoHopping/durga_puja_hopping/src/main/java/com/arpan/durga_puja_hopping/config/GlobalCorsConfig.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-18 21:55:01.495
+!MESSAGE [Info] Document is null for editor: SecurityConfig.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-18 21:55:01.496
+!MESSAGE [Info] Completion handler is refreshed for the document: file:///D:/Project/durgaPujoHopping/durga_puja_hopping/src/main/java/com/arpan/durga_puja_hopping/config/SecurityConfig.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-18 21:55:01.534
+!MESSAGE [Info] Document is null for editor: JwtFilter.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-18 21:55:01.534
+!MESSAGE [Info] Completion handler is refreshed for the document: file:///D:/Project/durgaPujoHopping/durga_puja_hopping/src/main/java/com/arpan/durga_puja_hopping/filter/JwtFilter.java
