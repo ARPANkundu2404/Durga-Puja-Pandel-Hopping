@@ -66,8 +66,7 @@ public class SecurityConfig {
 								"/api/otps",
 								"/v3/api-docs/**",
 								"/swagger-ui/**", 
-								"/swagger-ui/index.html",
-								"/api/auth/logout").permitAll()
+								"/swagger-ui/index.html").permitAll()
 						.requestMatchers("/api/tickets/**").authenticated()
 						.anyRequest().authenticated())
 					.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

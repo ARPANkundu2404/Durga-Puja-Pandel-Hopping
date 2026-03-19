@@ -41,7 +41,8 @@ public class PandalDtls {
     @Column(nullable = false)
     private String zone;
 
-    @Column(length = 1000, nullable = true)
+	@NotBlank(message = "Details cannot be empty")
+    @Column(length = 1000)
     private String details;
 
     @Enumerated(EnumType.STRING)

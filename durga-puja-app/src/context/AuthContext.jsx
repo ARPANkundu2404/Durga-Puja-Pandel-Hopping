@@ -41,15 +41,16 @@ export const AuthProvider = ({ children }) => {
    */
   
   const login = (token, email, name = "", role = "") => {
-  api.setToken(token);
-  localStorage.setItem("userEmail", email);
-  localStorage.setItem("userName", name);
-  localStorage.setItem("userRole", role);
-  setUserEmail(email);
-  setUserName(name);
-  setRole(role);
-  setIsAuthenticated(true);
-};
+    api.setToken(token);
+    localStorage.setItem("userEmail", email);
+    localStorage.setItem("userName", name);
+    localStorage.setItem("userRole", role);
+    setJwtToken(token);
+    setUserEmail(email);
+    setUserName(name);
+    setRole(role);
+    setIsAuthenticated(true);
+  };
 
   /**
    * Logout function: clears user data and JWT
@@ -58,6 +59,7 @@ export const AuthProvider = ({ children }) => {
     api.removeToken();
     localStorage.removeItem("userEmail");
     localStorage.removeItem("userName");
+    localStorage.removeItem("userRole");
     setJwtToken("");
     setUserEmail("");
     setUserName("");

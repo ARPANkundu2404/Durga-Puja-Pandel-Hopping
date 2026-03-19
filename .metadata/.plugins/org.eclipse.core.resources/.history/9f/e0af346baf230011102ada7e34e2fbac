@@ -15,7 +15,8 @@ public class GlobalCorsConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(List.of(
-            "http://localhost:5173",// Your React/Vite frontend// backend server
+            "http://localhost:5173",// Your React/Vite frontend
+            "https://durga-puja-pandel-hopping-backend.onrender.com",// backend server
             "https://durga-puja-pandel-hopping-app.onrender.com"// frontend server
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
