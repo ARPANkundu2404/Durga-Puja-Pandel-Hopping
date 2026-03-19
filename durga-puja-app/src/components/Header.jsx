@@ -66,167 +66,169 @@ const Header = () => {
   };
 
   return (
-    <nav className="bg-[#B22222] w-full px-2">
-      <div className="relative flex items-center justify-between h-14">
-        {/* Left: Logo */}
-        <div className="flex items-center flex-shrink-0">
-          <Link to="/details">
-            <div className="bg-[#FDF5E6] rounded-full p-1 shadow-md border border-[#FFD700] hover:scale-105 transition-all duration-200">
-              <img
-                className="h-7 w-7 rounded-full object-cover shrink-0"
-                src={logo}
-                alt="logo"
-              />
-            </div>
-          </Link>
-        </div>
-
-        {/* Center: Title */}
-        <h1 className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-extrabold font-serif text-[#FFD700] text-xl whitespace-nowrap">
-          আলোয় ভরা শহর!
-        </h1>
-
-        {/* Right: Nav Links + Avatar + Hamburger */}
-        <div className="flex items-center gap-3 md:gap-5 flex-shrink-0">
-          <div className="hidden md:flex items-center gap-3 md:gap-5">
-            <Link
-              to="/"
-              className={`rounded-lg py-2 px-3 font-medium text-[#FDF5E6] transition-all duration-200 hover:bg-[#4B2E2E] hover:shadow-md ${
-                location.pathname === "/" ? "bg-[#4B2E2E]/70" : ""
-              }`}
-            >
-              Home
-            </Link>
-            <Link
-              to="/pandals"
-              className={`rounded-lg py-2 px-3 font-medium text-[#FDF5E6] transition-all duration-200 hover:bg-[#4B2E2E] hover:shadow-md ${
-                location.pathname === "/pandals" ? "bg-[#4B2E2E]/70" : ""
-              }`}
-            >
-              Pandel
-            </Link>
-            <Link
-              to="/map"
-              className={`rounded-lg py-2 px-3 font-medium text-[#FDF5E6] transition-all duration-200 hover:bg-[#4B2E2E] hover:shadow-md ${
-                location.pathname === "/map" ? "bg-[#4B2E2E]/70" : ""
-              }`}
-            >
-              Map
+    <nav className="bg-[#B22222] w-full">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="relative flex items-center justify-between h-14">
+          {/* Left: Logo */}
+          <div className="flex items-center shrink-0">
+            <Link to="/details">
+              <div className="bg-[#FDF5E6] rounded-full p-1 shadow-md border border-[#FFD700] hover:scale-105 transition-all duration-200">
+                <img
+                  className="h-7 w-7 rounded-full object-cover shrink-0"
+                  src={logo}
+                  alt="logo"
+                />
+              </div>
             </Link>
           </div>
 
-          {/* Avatar / login (desktop only) */}
-          <div className="hidden md:flex items-center">
-            {!isAuthenticated ? (
+          {/* Center: Title */}
+          <h1 className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-extrabold font-serif text-[#FFD700] text-xl whitespace-nowrap">
+            আলোয় ভরা শহর!
+          </h1>
+
+          {/* Right: Nav Links + Avatar + Hamburger */}
+          <div className="flex items-center gap-3 md:gap-4 shrink-0 min-w-0">
+            <div className="hidden md:flex items-center gap-3 md:gap-4">
               <Link
-                to="/login"
-                aria-label="Sign in"
-                className="flex items-center justify-center"
+                to="/"
+                className={`rounded-lg py-2 px-3 font-medium text-[#FDF5E6] transition-all duration-200 hover:bg-[#4B2E2E] hover:shadow-md ${
+                  location.pathname === "/" ? "bg-[#4B2E2E]/70" : ""
+                }`}
               >
-                <div className="w-9 h-9 rounded-full flex items-center justify-center bg-[#FFD700] text-[#B22222] shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-md">
-                  {/* User icon */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-5 h-5"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12 2a5 5 0 100 10 5 5 0 000-10zm-7 18a7 7 0 0114 0H5z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
+                Home
               </Link>
-            ) : (
-              <div className="relative">
-                <button
-                  aria-haspopup="true"
-                  aria-expanded={dropdownOpen}
-                  onClick={() => setDropdownOpen((s) => !s)}
-                  className="flex items-center gap-2 focus:outline-none"
+              <Link
+                to="/pandals"
+                className={`rounded-lg py-2 px-3 font-medium text-[#FDF5E6] transition-all duration-200 hover:bg-[#4B2E2E] hover:shadow-md ${
+                  location.pathname === "/pandals" ? "bg-[#4B2E2E]/70" : ""
+                }`}
+              >
+                Pandel
+              </Link>
+              <Link
+                to="/map"
+                className={`rounded-lg py-2 px-3 font-medium text-[#FDF5E6] transition-all duration-200 hover:bg-[#4B2E2E] hover:shadow-md ${
+                  location.pathname === "/map" ? "bg-[#4B2E2E]/70" : ""
+                }`}
+              >
+                Map
+              </Link>
+            </div>
+
+            {/* Avatar / login (desktop only) */}
+            <div className="hidden md:flex items-center">
+              {!isAuthenticated ? (
+                <Link
+                  to="/login"
+                  aria-label="Sign in"
+                  className="flex items-center justify-center"
                 >
-                  {/* Avatar circle */}
-                  <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center text-[#B22222] font-semibold shadow-sm"
-                    style={{ backgroundColor: "#FFD700" }}
-                  >
-                    {initial}
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center bg-[#FFD700] text-[#B22222] shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-md">
+                    {/* User icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-5 h-5"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M12 2a5 5 0 100 10 5 5 0 000-10zm-7 18a7 7 0 0114 0H5z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
                   </div>
+                </Link>
+              ) : (
+                <div className="relative">
+                  <button
+                    aria-haspopup="true"
+                    aria-expanded={dropdownOpen}
+                    onClick={() => setDropdownOpen((s) => !s)}
+                    className="flex items-center gap-2 focus:outline-none"
+                  >
+                    {/* Avatar circle */}
+                    <div
+                      className="w-9 h-9 rounded-full flex items-center justify-center text-[#B22222] font-semibold shadow-sm"
+                      style={{ backgroundColor: "#FFD700" }}
+                    >
+                      {initial}
+                    </div>
 
-                  {/* small caret */}
-                  <span className="hidden md:inline text-[#FDF5E6] select-none">
-                    ▾
-                  </span>
-                </button>
+                    {/* small caret */}
+                    <span className="hidden md:inline text-[#FDF5E6] select-none">
+                      ▾
+                    </span>
+                  </button>
 
-                {/* Animated dropdown - stays in DOM for smooth transition */}
-                <div
-                  className={`absolute right-0 mt-3 w-56 rounded-lg z-50 transform transition-all duration-300 origin-top-right
+                  {/* Animated dropdown - stays in DOM for smooth transition */}
+                  <div
+                    className={`absolute right-0 mt-3 w-56 rounded-lg z-50 transform transition-all duration-300 origin-top-right
                     ${
                       dropdownOpen
                         ? "opacity-100 translate-y-0 pointer-events-auto"
                         : "opacity-0 translate-y-2 pointer-events-none"
                     }
                   `}
-                  role="menu"
-                  aria-hidden={!dropdownOpen}
-                >
-                  <div className="bg-[#B22222] border border-[#FFD700] rounded-lg shadow-lg overflow-hidden">
-                    {/* Email Header */}
-                    <div className="px-4 py-3 text-sm text-[#FFD700] border-b border-[#FFD700]">
-                      {userEmail}
+                    role="menu"
+                    aria-hidden={!dropdownOpen}
+                  >
+                    <div className="bg-[#B22222] border border-[#FFD700] rounded-lg shadow-lg overflow-hidden">
+                      {/* Email Header */}
+                      <div className="px-4 py-3 text-sm text-[#FFD700] border-b border-[#FFD700]">
+                        {userEmail}
+                      </div>
+
+                      {/* Conditional Role-Based Links */}
+                      {role === "AUTHORITY" && (
+                        <Link
+                          to="/authority"
+                          onClick={() => setDropdownOpen(false)}
+                          className="px-4 py-2 text-[#FDF5E6] hover:bg-[#4B2E2E] transition-colors duration-200 flex items-center gap-2 border-b border-[#FFD700]/30"
+                        >
+                          <LayoutDashboard size={16} />
+                          My Pandal Dashboard
+                        </Link>
+                      )}
+
+                      {role === "ADMIN" && (
+                        <Link
+                          to="/admin"
+                          onClick={() => setDropdownOpen(false)}
+                          className="px-4 py-2 text-[#FDF5E6] hover:bg-[#4B2E2E] transition-colors duration-200 flex items-center gap-2 border-b border-[#FFD700]/30"
+                        >
+                          <ShieldCheck size={16} />
+                          Admin Panel
+                        </Link>
+                      )}
+
+                      {/* Sign Out Button */}
+                      <button
+                        onClick={handleLogout}
+                        disabled={logoutLoading}
+                        className="w-full text-left px-4 py-2 text-[#FDF5E6] hover:bg-[#4B2E2E] flex items-center gap-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <LogOut size={16} />
+                        {logoutLoading ? "Signing Out..." : "Sign Out"}
+                      </button>
                     </div>
-
-                    {/* Conditional Role-Based Links */}
-                    {role === "AUTHORITY" && (
-                      <Link
-                        to="/authority"
-                        onClick={() => setDropdownOpen(false)}
-                        className="px-4 py-2 text-[#FDF5E6] hover:bg-[#4B2E2E] transition-colors duration-200 flex items-center gap-2 border-b border-[#FFD700]/30"
-                      >
-                        <LayoutDashboard size={16} />
-                        My Pandal Dashboard
-                      </Link>
-                    )}
-
-                    {role === "ADMIN" && (
-                      <Link
-                        to="/admin"
-                        onClick={() => setDropdownOpen(false)}
-                        className="px-4 py-2 text-[#FDF5E6] hover:bg-[#4B2E2E] transition-colors duration-200 flex items-center gap-2 border-b border-[#FFD700]/30"
-                      >
-                        <ShieldCheck size={16} />
-                        Admin Panel
-                      </Link>
-                    )}
-
-                    {/* Sign Out Button */}
-                    <button
-                      onClick={handleLogout}
-                      disabled={logoutLoading}
-                      className="w-full text-left px-4 py-2 text-[#FDF5E6] hover:bg-[#4B2E2E] flex items-center gap-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <LogOut size={16} />
-                      {logoutLoading ? "Signing Out..." : "Sign Out"}
-                    </button>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              className="text-[#FFD700] focus:outline-none"
-              aria-label="Open menu"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <Menu size={24} />
-            </button>
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <button
+                className="text-[#FFD700] focus:outline-none"
+                aria-label="Open menu"
+                onClick={() => setSidebarOpen(true)}
+              >
+                <Menu size={24} />
+              </button>
+            </div>
           </div>
         </div>
       </div>

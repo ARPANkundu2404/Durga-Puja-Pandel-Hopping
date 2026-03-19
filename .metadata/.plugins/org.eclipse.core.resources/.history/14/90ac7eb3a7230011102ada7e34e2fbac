@@ -15,7 +15,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.arpan.durga_puja_hopping.filter.JwtFilter;
 
@@ -30,9 +32,6 @@ public class SecurityConfig {
 
 	@Autowired
 	private JwtFilter jwtFilter;
-
-	@Autowired
-	private CorsConfigurationSource corsConfigurationSource; // use global bean
 
 	/**
 	 * BCryptPasswordEncoder is the recommended password encoder for Spring
@@ -53,7 +52,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
-			.cors(cors -> cors.configurationSource(corsConfigurationSource))
+			.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 			.csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests(
 						auth -> auth
@@ -95,5 +94,27 @@ public class SecurityConfig {
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
+	}
+
+	/**
+	 * Provides a CorsConfigurationSource bean so the lambda in filterChain can
+	 * reference it. This configuration allows common HTTP methods and headers and
+	 * is permissive for development; tighten origins/headers for production.
+	 */
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.addAllowedOriginPattern("*"); // allow any origin (use specific domains in prod)
+		configuration.addAllowedHeader("*");
+		configuration.addAllowedMethod("GET");
+		configuration.addAllowedMethod("POST");
+		configuration.addAllowedMethod("PUT");
+		configuration.addAllowedMethod("DELETE");
+		configuration.addAllowedMethod("OPTIONS");
+		configuration.setAllowCredentials(true);
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
 	}
 }
