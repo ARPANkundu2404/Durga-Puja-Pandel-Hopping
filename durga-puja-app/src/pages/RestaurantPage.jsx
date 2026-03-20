@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
+import { ArrowLeft } from "lucide-react";
 
 const RestaurantPage = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -71,78 +72,79 @@ const RestaurantPage = () => {
       () => {
         setError("Please enable location services");
         setLoading(false);
-      }
+      },
     );
   };
 
   return (
-    <div className="w-screen h-screen overflow-hidden flex items-center justify-center bg-[#FDF5E6] p-8">
-      <div className="relative w-full max-w-4xl bg-linear-to-r from-[#FFCF67]/60 to-[#D3321D]/60 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-6 max-h-[90vh]">
+    <div className="min-h-screen bg-[#FDF5E6] flex items-center justify-center px-4 py-6">
+      <div className="w-full max-w-3xl rounded-2xl shadow-2xl backdrop-blur-md border border-white/20 bg-linear-to-r from-[#FFCF67]/70 to-[#D3321D]/70 p-6 md:p-8">
+        {/* Back Button */}
         <button
           aria-label="Back"
           onClick={() => navigate(-1)}
-          className="absolute left-4 top-4 p-2 rounded-full text-[#4B2E2E] hover:bg-white/20 transition-colors cursor-pointer"
+          className="flex items-center gap-2 text-[#4B2E2E] hover:bg-white/20 rounded-full p-2 transition-all duration-300 hover:scale-105 mb-6"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M19 12H5" />
-            <path d="M12 19l-7-7 7-7" />
-          </svg>
+          <ArrowLeft size={20} />
         </button>
 
-        <div className="overflow-y-auto max-h-[80vh] pr-4">
-          <h1 className="text-3xl font-bold text-[#B22222] text-center mb-6">
+        <div className="space-y-6">
+          {/* Title */}
+          <h1 className="text-3xl md:text-4xl font-bold text-[#B22222] text-center">
             Nearby Restaurants 🍽️
           </h1>
 
-          <div className="flex justify-center mb-8">
+          {/* Find Button */}
+          <div className="flex justify-center">
             <button
               onClick={detectLocationAndFetch}
-              className="bg-[#B22222] text-[#FFD700] px-6 py-3 rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer transition-colors"
+              disabled={loading}
+              className="bg-[#B22222] text-white px-8 py-3 rounded-full font-semibold hover:scale-105 active:scale-95 transition-transform duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
             >
-              Find Nearby Restaurants 📍
+              {loading
+                ? "Finding Restaurants..."
+                : "Find Nearby Restaurants 📍"}
             </button>
           </div>
 
-          {/* Loading */}
+          {/* Loading State */}
           {loading && (
-            <p className="text-center text-gray-600">
-              Finding nearby restaurants...
-            </p>
+            <div className="flex justify-center items-center space-x-2">
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-[#B22222]"></div>
+              <p className="text-[#4B2E2E] font-medium">
+                Finding nearby restaurants...
+              </p>
+            </div>
           )}
 
-          {/* Error */}
-          {error && <p className="text-center text-red-600">{error}</p>}
+          {/* Error State */}
+          {error && (
+            <div className="bg-red-100/80 border border-red-400 text-red-800 px-4 py-3 rounded-lg text-center">
+              {error}
+            </div>
+          )}
 
-          {/* Restaurant List */}
+          {/* Restaurant Cards Grid */}
           {!loading && restaurants.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {restaurants.map((place) => (
                 <div
                   key={place.id}
-                  className="border rounded-lg p-4 shadow-sm hover:shadow-md transition"
+                  className="bg-white/40 backdrop-blur-sm rounded-lg p-4 border border-white/20 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-200 cursor-pointer"
                 >
-                  <h3 className="text-lg font-semibold text-[#4B2E2E]">
+                  <h3 className="text-lg font-semibold text-[#4B2E2E] mb-2">
                     {place.tags?.name || "Unnamed Restaurant"}
                   </h3>
 
                   {place.tags?.cuisine && (
-                    <p className="text-sm text-gray-600">
-                      Cuisine: {place.tags.cuisine}
+                    <p className="text-sm text-[#7f1b1b] font-medium mb-1">
+                      🍴 {place.tags.cuisine}
                     </p>
                   )}
 
                   {place.tags?.["addr:street"] && (
-                    <p className="text-sm text-gray-500 mt-1">
-                      {place.tags["addr:street"]}
+                    <p className="text-sm text-[#4B2E2E] leading-relaxed">
+                      📍 {place.tags["addr:street"]}
                     </p>
                   )}
                 </div>
@@ -150,11 +152,13 @@ const RestaurantPage = () => {
             </div>
           )}
 
-          {/* No Results */}
+          {/* No Results State */}
           {!loading && !error && restaurants.length === 0 && (
-            <p className="text-center text-gray-500">
-              No restaurants found nearby.
-            </p>
+            <div className="text-center py-8">
+              <p className="text-[#4B2E2E] text-lg font-medium">
+                Click the button above to find nearby restaurants
+              </p>
+            </div>
           )}
         </div>
       </div>

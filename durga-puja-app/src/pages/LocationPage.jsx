@@ -9,7 +9,7 @@ const LocationPage = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => setPos(position),
-        (err) => console.error("Geolocation error:", err)
+        (err) => console.error("Geolocation error:", err),
       );
     }
   }, []);
@@ -49,12 +49,12 @@ const LocationPage = () => {
               onClick={() => {
                 window.open(
                   `https://www.google.com/maps/search/?api=1&query=${user_lat},${user_lng}`,
-                  "_blank"
+                  "_blank",
                 );
               }}
               className="bg-[#B22222] text-[#FFD700] px-6 py-3 rounded-lg hover:bg-[#4B2E2E] hover:cursor-pointer transition-colors"
             >
-              Find Nearby Restaurants 📍
+              Find where are you 📍
             </button>
           </div>
         </div>

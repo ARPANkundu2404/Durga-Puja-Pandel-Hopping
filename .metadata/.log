@@ -9378,3 +9378,33 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.lsp4e 1 0 2026-03-19 22:00:15.601
 !MESSAGE [Info]	[code-referencing] No match found
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-20 01:19:07.927
+!MESSAGE [Info] Document is null for editor: SecurityConfig.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-20 01:19:07.934
+!MESSAGE [Info] Completion handler is refreshed for the document: file:///D:/Project/durgaPujoHopping/durga_puja_hopping/src/main/java/com/arpan/durga_puja_hopping/config/SecurityConfig.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-20 01:19:08.249
+!MESSAGE [Info] Document is null for editor: JwtFilter.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-20 01:19:08.250
+!MESSAGE [Info] Completion handler is refreshed for the document: file:///D:/Project/durgaPujoHopping/durga_puja_hopping/src/main/java/com/arpan/durga_puja_hopping/filter/JwtFilter.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-20 01:19:08.311
+!MESSAGE [Info] Document is null for editor: PandalDtls.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-20 01:19:08.313
+!MESSAGE [Info] Completion handler is refreshed for the document: file:///D:/Project/durgaPujoHopping/durga_puja_hopping/src/main/java/com/arpan/durga_puja_hopping/entity/PandalDtls.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-20 01:19:08.472
+!MESSAGE [Info] Document is null for editor: PandalController.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-20 01:19:08.473
+!MESSAGE [Info] Completion handler is refreshed for the document: file:///D:/Project/durgaPujoHopping/durga_puja_hopping/src/main/java/com/arpan/durga_puja_hopping/controller/PandalController.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-20 01:19:08.562
+!MESSAGE [Info] Document is null for editor: GlobalCorsConfig.java
+
+!ENTRY com.microsoft.copilot.eclipse 1 0 2026-03-20 01:19:08.563
+!MESSAGE [Info] Completion handler is refreshed for the document: file:///D:/Project/durgaPujoHopping/durga_puja_hopping/src/main/java/com/arpan/durga_puja_hopping/config/GlobalCorsConfig.java
