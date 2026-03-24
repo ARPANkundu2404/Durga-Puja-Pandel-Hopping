@@ -1,118 +1,145 @@
-# 🪔 Durga Puja Pandal Hopping 🪔
+# 🪔 Alor Shohor – Puja Navigator 🪔  
 
-A web-based application designed to help users explore **Durga Puja pandals, nearby restaurants, location details, and metro/transport information** in Kolkata through a structured and easy-to-use interface.
+### (Durga Puja Pandal Hopping System)
 
-🌐 **Live Project:** [https://durga-puja-pandel-hopping.onrender.com/](https://durga-puja-pandel-hopping.onrender.com/)
+A **full-stack, role-based web application** designed to help users explore Durga Puja pandals, plan routes efficiently, and access nearby services like restaurants and transport — all with a **secure RBAC system and real-time navigation**.
+
+🌐 **Live App:**  
+https://durga-puja-pandel-hopping-app.onrender.com
 
 ---
 
 ## 📖 Table of Contents
 
-- [Overview](#-overview)
-- [System Flow](#️-system-flow-based-on-project-flowchart)
-- [Features](#-features)
-- [Screenshots](#-screenshots)
-- [Getting Started](#-getting-started)
-- [Usage](#-usage)
-- [Project Structure](#-project-structure)
-- [Contributing](#-contributing)
-- [License](#-license)
+- Overview  
+- System Architecture  
+- Workflow Diagram  
+- Features  
+- Role-Based Access (RBAC)  
+- Tech Stack  
+- Getting Started  
+- Usage  
+- Project Structure  
+- Future Scope  
+- Challenges  
+- Contributing  
+- License  
 
 ---
 
 ## ✨ Overview
 
-**Durga Puja Pandal Hopping** acts as a digital guide during the Durga Puja festival.  
-The application is structured around a central **Home** page from which users can navigate to different modules such as:
+Durga Puja is one of the largest festivals in India, where thousands of pandals are spread across cities.
 
-- Pandal exploration (zone-wise)
-- Nearby restaurants
-- Location awareness
-- Metro and transport guidance
-- User authentication
+**Alor Shohor – Puja Navigator** provides a centralized platform where:
 
-The system follows a **simple and traditional flow**, ensuring clarity, maintainability, and usability.
+- Users explore verified pandals  
+- Authorities manage pandal data  
+- Admins ensure data authenticity  
 
----
-
-## ⚙️ System Flow (Based on Project Flowchart)
-
-### 🔹 Entry Point
-
-- User enters the application → **Home Page**
-
-### 🔹 Navigation (Navbar)
-
-From the Home page, users can navigate to:
-
-- Pandal
-- Location
-- Sign-in / Sign-up
+The system follows a **moderated architecture**, ensuring only approved and trusted data reaches end users.
 
 ---
 
-### 🏛️ Pandal Module Flow
+## 🧩 System Architecture
 
-1.  Home → **Pandal**
-2.  Pandal → **Zone Selection**
-3.  Zone → **List of Pandals**
-4.  Select a Pandal → **Pandal Details**
-5.  Click Address Pin →
-    - Fetch user location
-    - Show **shortest route & direction** using Google Maps API
+Frontend (React.js)
+↓
+Backend (Spring Boot + JWT Security)
+↓
+Database (PostgreSQL)
 
 ---
 
-### 🍽️ Restaurant Module Flow
+### 🔍 Description
 
-1.  Home → **Restaurant**
-2.  Fetch user location
-3.  Display **list of nearby restaurants**
-4.  Select a restaurant → **Restaurant Details**
-5.  Restaurant data fetched using Google Maps / location-based services
+- **Frontend** → UI, routing, API calls  
+- **Backend** → Business logic, RBAC, authentication  
+- **Database** → Stores users, pandals, ownership, status  
 
 ---
 
-### 📍 Location Module
+## 🔁 Workflow Diagram
 
-- Detects and displays the user's current location
-- Helps other modules (Restaurant, Direction, Metro) work accurately
-
----
-
-### 🚇 Metro Module
-
-- Provides nearby:
-  - Metro stations
-  - Railway stations
-  - Bus stops
-- Displays accessible routes and transport information
-- Informational and user-assist focused
+![Workflow Diagram](https://res.cloudinary.com/dyr6oh3vg/image/upload/v1774354550/mermaid-diagram_bk2qci.png)
 
 ---
 
-### 🔐 Authentication Flow
+## 👥 Role-Based System (RBAC)
 
-1.  Home → Sign-in / Sign-up
-2.  **Sign-in:**
-    - Login with credentials
-    - Option for **Forgot Password**
-3.  **Sign-up:**
-    - New user registration
-4.  After authentication → Redirect back to Home
+The system is built on **JWT-based Role-Based Access Control**:
+
+| Role | Description |
+|------|------------|
+| USER | Explore approved pandals |
+| AUTHORITY | Create & manage pandals |
+| ADMIN | Approve / reject pandals |
+
+👉 **RBAC enforced using JWT (ROLE_USER / ROLE_AUTHORITY / ROLE_ADMIN)**
 
 ---
 
-## 🎉 Features
+## 🚀 Features
 
-- Responsive UI for mobile and desktop
-- Zone-wise pandal browsing
-- Detailed pandal information
-- Location-based nearby restaurants
-- Direction and route assistance
-- Metro and transport information
-- Authentication flow (Sign-in / Sign-up / Forgot Password)
-- Clean and modular page structure
+### 👤 USER FEATURES
+
+- View only **approved pandals**
+- Explore pandals zone-wise  
+- Navigate to:
+  - 🏮 Pandals  
+  - 🍽️ Restaurants  
+  - 🚇 Transport  
+- Map-based exploration  
+
+---
+
+### 🏢 AUTHORITY PANEL
+
+- Create pandal request  
+- View own pandals  
+- Edit / delete own pandals  
+
+#### 🔐 Ownership Logic
+
+- Each pandal is linked to its creator  
+- Only the owner can modify it  
+
+---
+
+### 🛠️ ADMIN PANEL
+
+- View pending pandal requests  
+- Approve pandals → visible to users  
+- Reject pandals → deleted from database  
+- Maintain system integrity  
+
+---
+
+### 🔐 AUTHENTICATION SYSTEM
+
+- Sign Up / Login  
+- JWT-based authentication  
+- Role extracted from token  
+- Protected routes  
+
+---
+
+### 📍 UNIFIED NAVIGATION SYSTEM
+
+Navigation works across:
+- Pandals  
+- Restaurants  
+- Transport  
+
+#### 🔁 Flow:
+
+1. User selects location  
+2. System checks authentication  
+3. Fetch user location  
+4. Google Maps API  
+5. Show shortest route  
+
+👉 **Navigation is only enabled for authenticated users**
 
 ---
 
@@ -128,81 +155,160 @@ From the Home page, users can navigate to:
 
 ---
 
+## 🔄 System Workflow (Important)
+
+### 🏢 Authority Flow
+
+- Submit pandal → stored as **PENDING**
+- Linked with `createdBy`
+- Can only manage own pandals  
+
+---
+
+### 🛠️ Admin Flow
+
+- Reviews pending pandals  
+- Approve → visible to users  
+- Reject → permanently deleted  
+
+---
+
+### 👤 User Flow
+
+- Access only **approved pandals**  
+- Navigation available after login  
+
+---
+
+## ⚙️ Tech Stack
+
+### 🖥️ Frontend
+
+- React.js  
+- Tailwind CSS  
+- Framer Motion  
+- JavaScript  
+- Lucide Icons  
+
+### ⚙️ Backend
+
+- Spring Boot  
+- JWT Authentication (RBAC)  
+- Swagger & Postman  
+
+### 🗄️ Database
+
+- PostgreSQL  
+*(Migrated from MySQL)*  
+
+### 🚀 Deployment
+
+- Docker  
+- Render  
+
+---
+
 ## ⚡ Getting Started
 
 ### Prerequisites
 
-- Node.js (v14 or above)
-- npm or yarn
-
-### Installation
-
-````bash
-git clone [https://github.com/ARPANkundu2404/Durga-Puja-Pandel-Hopping.git](https://github.com/ARPANkundu2404/Durga-Puja-Pandel-Hopping.git)
-cd Durga-Puja-Pandel-Hopping
-npm install
-# or
-yarn install
-````
+- Node.js  
+- Java (Spring Boot)  
+- PostgreSQL  
 
 ---
 
-### Run Locally
+### Installation
 
 ```bash
-npm start
-# or
-yarn start
-Open in browser: `http://localhost:3000`
+git clone https://github.com/ARPANkundu2404/Durga-Puja-Pandel-Hopping.git
+cd Durga-Puja-Pandel-Hopping
+```
+
+#### Run Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+#### Run Backend
+
+```bash
+cd backend
+mvn spring-boot:run
 ```
 
 ---
 
 ## 🚀 Usage
-* **Home:** Central navigation hub
-* **Pandal:** Browse pandals by zone and view details
-* **Restaurant:** Find nearby food options using location
-* **Location:** View current user location
-* **Metro:** Check nearby metro, railway, and bus routes
-* **Login:** Access authentication features
+
+Home → Central navigation
+Pandal → Explore pandals
+Restaurant → Nearby suggestions
+Transport → Metro & routes
+Login → Access secure features
 
 ---
 
 ## 📁 Project Structure
 
 ```plaintext
-Durga-Puja-Pandel-Hopping/
-├── public/                 # Static files
-├── src/
-│   ├── components/         # Reusable UI components
-│   ├── pages/              # Home, Pandal, Restaurant, Metro, Auth pages
-│   ├── data/               # Zone and pandal data
-│   ├── context/            # Authentication & global state
-│   ├── App.js              # Routing and layout
-│   └── index.js            # Application entry point
-├── package.json            # Dependencies and scripts
-└── README.md               # Project documentation
+
+frontend/
+├── components/
+├── pages/
+├── context/
+├── utils/
+
+backend/
+├── controller/
+├── service/
+├── repository/
+├── entity/
+├── security/
+
 ```
 
 ---
 
+## 🧠 Future Enhancements
+
+🤖 AI-based route optimization
+🗺️ Personalized pandal planning
+🍽️ Smart restaurant recommendations
+📊 Crowd analysis
+📶 Offline support
+
+---
+
+## ⚠️ Challenges Faced
+
+Free API limitations
+MySQL → PostgreSQL migration
+Deployment issues
+JWT inconsistencies (403 errors)
+Designing RBAC system
+
+---
+
 ## 🤝 Contributing
-Contributions are welcome.
 
-1. **Fork** the repository
-2. **Create** a new branch
-3. **Commit** your changes
-4. **Open** a pull request
-
-Please follow the existing structure and coding standards.
+Fork the repo
+Create a branch
+Commit changes
+Open PR
 
 ---
 
 ## 📜 License
+
 This project is licensed under the **MIT License**.
 
 ---
 
 ## 🙏 Credits
-**Developed by Arpan Kundu** Inspired by the tradition of Durga Puja and built with modern web technologies.
 
+Developed by Arpan Kundu
+Inspired by the spirit of Durga Puja and built with modern web technologies.
